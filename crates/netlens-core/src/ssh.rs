@@ -91,6 +91,31 @@ impl SshTarget {
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
             .spawn()?;
+        // Drain both pipes concurrently: `show tech-support` easily exceeds the
+        // pipe buffer and would otherwise block the child until the timeout.
+        let drain = |r: Option<Box<dyn Read + Send>>| {
+            std::thread::spawn(move || {
+                let mut s = String::new();
+                if let Some(mut r) = r {
+                    let mut buf = Vec::new();
+                    let _ = r.read_to_end(&mut buf);
+                    s = String::from_utf8_lossy(&buf).into_owned();
+                }
+                s
+            })
+        };
+        let out_h = drain(
+            child
+                .stdout
+                .take()
+                .map(|o| Box::new(o) as Box<dyn Read + Send>),
+        );
+        let err_h = drain(
+            child
+                .stderr
+                .take()
+                .map(|e| Box::new(e) as Box<dyn Read + Send>),
+        );
         let mut timed_out = false;
         let status = loop {
             if let Some(s) = child.try_wait()? {
@@ -103,14 +128,8 @@ impl SshTarget {
             }
             std::thread::sleep(Duration::from_millis(50));
         };
-        let mut stdout = String::new();
-        let mut stderr = String::new();
-        if let Some(mut o) = child.stdout.take() {
-            o.read_to_string(&mut stdout)?;
-        }
-        if let Some(mut e) = child.stderr.take() {
-            e.read_to_string(&mut stderr)?;
-        }
+        let stdout = out_h.join().unwrap_or_default();
+        let stderr = err_h.join().unwrap_or_default();
         Ok(SshOutput {
             status,
             stdout,
@@ -153,5 +172,33 @@ mod tests {
         assert!(SshTarget::new("-oProxyCommand=evil").is_err());
         assert!(SshTarget::new("a b").is_err());
         assert!(SshTarget::new("").is_err());
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn large_output_does_not_deadlock() {
+        use std::os::unix::fs::PermissionsExt;
+        let dir = tempfile::tempdir().unwrap();
+        let fake = dir.path().join("fake-ssh");
+        std::fs::write(
+            &fake,
+            "#!/bin/sh\nhead -c 300000 /dev/zero | tr '\\0' 'x'\necho done >&2\n",
+        )
+        .unwrap();
+        std::fs::set_permissions(&fake, std::fs::Permissions::from_mode(0o755)).unwrap();
+        let mut t = SshTarget::new("r1").unwrap();
+        t.ssh_binary = fake.display().to_string();
+        let cmd = CommandPolicy::builtin()
+            .approve(
+                Vendor::CiscoIos,
+                "show tech-support",
+                HumanApproval::confirmed_by_human(),
+            )
+            .unwrap();
+        let out = t.run(&cmd, Duration::from_secs(10)).unwrap();
+        assert!(!out.timed_out);
+        assert_eq!(out.status, Some(0));
+        assert_eq!(out.stdout.len(), 300000);
+        assert_eq!(out.stderr.trim(), "done");
     }
 }
