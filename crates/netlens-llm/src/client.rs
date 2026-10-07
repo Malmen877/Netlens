@@ -214,10 +214,13 @@ impl ChatBackend for OpenAiClient {
                 return Err(LlmError::Http { status, body, hint });
             }
             Err(ureq::Error::Transport(t)) => {
-                let detail = t.to_string();
-                if detail.to_ascii_lowercase().contains("timed out") {
+                if t.to_string().to_ascii_lowercase().contains("timed out") {
                     return Err(LlmError::Timeout(self.cfg.timeout));
                 }
+                let detail = match t.message() {
+                    Some(m) => format!("{}: {m}", t.kind()),
+                    None => t.kind().to_string(),
+                };
                 return Err(LlmError::Unreachable { endpoint, detail });
             }
         };

@@ -135,6 +135,11 @@ pub fn validate(text: &str, valid: &BTreeSet<String>) -> Validated {
         let ids = citations_in(&text);
         let (good, bad): (Vec<String>, Vec<String>) =
             ids.into_iter().partition(|i| valid.contains(i));
+        for b in &bad {
+            if !v.unknown_ids.contains(b) {
+                v.unknown_ids.push(b.clone());
+            }
+        }
         if good.is_empty() {
             let reason = if bad.is_empty() {
                 "no citation".to_string()
@@ -154,13 +159,14 @@ pub fn validate(text: &str, valid: &BTreeSet<String>) -> Validated {
             });
             continue;
         }
-        let mut t = text.clone();
-        for b in &bad {
-            if !v.unknown_ids.contains(b) {
-                v.unknown_ids.push(b.clone());
-            }
-            t = t.replace(&format!("[{b}]"), "");
-        }
+        // Rewrite each citation group keeping only valid ids ("[F1, F42]" -> "[F1]").
+        let t = RE_CITE.replace_all(&text, |c: &regex::Captures| {
+            c[1].split([',', ';'])
+                .map(|i| i.trim().to_ascii_uppercase())
+                .filter(|i| valid.contains(i))
+                .map(|i| format!("[{i}]"))
+                .collect::<String>()
+        });
         v.claims.push(Claim {
             section,
             text: clean(&t),
@@ -193,7 +199,8 @@ mod tests {
             .find(|c| c.text.starts_with("Mixed"))
             .unwrap();
         assert_eq!(mixed.citations, vec!["F1"]);
-        assert_eq!(v.unknown_ids, vec!["F42"]);
+        assert_eq!(mixed.text, "Mixed [F1]");
+        assert_eq!(v.unknown_ids, vec!["F99", "F42"]);
         assert_eq!(v.section("ROLLBACK")[0].citations, vec!["R1"]);
     }
 
