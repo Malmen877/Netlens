@@ -1,0 +1,38 @@
+[workspace]
+resolver = "2"
+members = ["crates/*"]
+default-members = ["crates/netlens-cli"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["Kevin Malmgren"]
+repository = "https://github.com/Malmen877/netlens"
+rust-version = "1.88"
+
+[workspace.dependencies]
+netlens-core = { path = "crates/netlens-core", version = "0.1.0" }
+netlens-llm = { path = "crates/netlens-llm", version = "0.1.0" }
+netlens-batfish = { path = "crates/netlens-batfish", version = "0.1.0" }
+netlens-mock = { path = "crates/netlens-mock", version = "0.1.0" }
+regex = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+thiserror = "2"
+anyhow = "1"
+ureq = { version = "2.12", features = ["json"] }
+tiny_http = "0.12"
+zip = { version = "2", default-features = false, features = ["deflate"] }
+uuid = { version = "1", features = ["v4"] }
+clap = { version = "4.5", features = ["derive", "env", "wrap_help"] }
+toml = "0.8"
+assert_cmd = "2"
+predicates = "3"
+tempfile = "3"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true
