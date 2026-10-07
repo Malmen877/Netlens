@@ -1,0 +1,19 @@
+[package]
+name = "netlens-batfish"
+description = "Minimal Batfish v2 REST client (pybatfish wire protocol) for netlens"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+netlens-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+ureq.workspace = true
+zip.workspace = true
+uuid.workspace = true
+
