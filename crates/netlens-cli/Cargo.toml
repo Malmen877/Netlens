@@ -1,0 +1,33 @@
+[package]
+name = "netlens"
+description = "Local, read-only AI copilot for network engineers: pre-change config review with cited findings"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+readme = "../../README.md"
+keywords = ["network", "cisco", "junos", "batfish", "llm"]
+categories = ["command-line-utilities", "network-programming"]
+
+[[bin]]
+name = "netlens"
+path = "src/main.rs"
+
+[dependencies]
+netlens-core.workspace = true
+netlens-llm.workspace = true
+netlens-batfish.workspace = true
+anyhow.workspace = true
+clap.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+toml.workspace = true
+
+[dev-dependencies]
+netlens-mock.workspace = true
+assert_cmd.workspace = true
+predicates.workspace = true
+tempfile.workspace = true
+serde_json.workspace = true
