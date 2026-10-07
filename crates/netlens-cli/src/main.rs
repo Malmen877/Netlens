@@ -34,6 +34,12 @@ pub enum Cmd {
     Review(review::ReviewArgs),
     /// Lint a single configuration file (no diff, no model)
     Lint(cmds::LintArgs),
+    /// List the deterministic rules
+    Rules {
+        /// JSON output
+        #[arg(long)]
+        json: bool,
+    },
     /// Redact secrets from a config or log (what the model would see)
     Redact(cmds::RedactArgs),
     /// Inspect the read-only command policy used by troubleshoot
@@ -58,6 +64,7 @@ fn main() -> ExitCode {
     let res = match cli.cmd {
         Cmd::Review(a) => review::run(a, cli.config.as_deref(), color),
         Cmd::Lint(a) => cmds::lint(a, color),
+        Cmd::Rules { json } => cmds::rules(json, color),
         Cmd::Redact(a) => cmds::redact(a),
         Cmd::Policy { cmd } => cmds::policy(cmd, cli.config.as_deref(), color),
         Cmd::Config { cmd } => cmds::config(cmd, cli.config.as_deref()),

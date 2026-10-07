@@ -132,6 +132,56 @@ impl OpenAiClient {
             .build();
         OpenAiClient { cfg, agent }
     }
+
+    fn send(
+        &self,
+        messages: &[ChatMessage],
+        reasoning_effort: Option<&'static str>,
+    ) -> Result<ureq::Response, LlmError> {
+        let endpoint = self.cfg.endpoint();
+        let body = ChatRequest {
+            model: &self.cfg.model,
+            messages: apply_no_think(&self.cfg.model, messages, self.cfg.no_think),
+            temperature: self.cfg.temperature,
+            stream: false,
+            max_tokens: self.cfg.max_tokens,
+            reasoning_effort,
+        };
+        let mut req = self
+            .agent
+            .post(&endpoint)
+            .set("Content-Type", "application/json");
+        if let Some(k) = self.cfg.api_key.as_deref().filter(|k| !k.is_empty()) {
+            req = req.set("Authorization", &format!("Bearer {k}"));
+        }
+        match req.send_json(
+            serde_json::to_value(&body).map_err(|e| LlmError::BadResponse(e.to_string()))?,
+        ) {
+            Ok(r) => Ok(r),
+            Err(ureq::Error::Status(status, r)) => {
+                let text = r.into_string().unwrap_or_default();
+                let body: String = text.chars().take(400).collect();
+                let hint = if status == 404 && body.contains("not found") {
+                    format!(" (hint: `ollama pull {}` or pass --model)", self.cfg.model)
+                } else if status == 401 || status == 403 {
+                    " (hint: set NETLENS_API_KEY)".to_string()
+                } else {
+                    String::new()
+                };
+                Err(LlmError::Http { status, body, hint })
+            }
+            Err(ureq::Error::Transport(t)) => {
+                if t.to_string().to_ascii_lowercase().contains("timed out") {
+                    return Err(LlmError::Timeout(self.cfg.timeout));
+                }
+                let detail = match t.message() {
+                    Some(m) => format!("{}: {m}", t.kind()),
+                    None => t.kind().to_string(),
+                };
+                Err(LlmError::Unreachable { endpoint, detail })
+            }
+        }
+    }
 }
 
 #[derive(Serialize)]
@@ -142,6 +192,14 @@ struct ChatRequest<'a> {
     stream: bool,
     #[serde(skip_serializing_if = "Option::is_none")]
     max_tokens: Option<u32>,
+    /// `"none"` turns thinking off on Ollama/vLLM for Qwen3.x (Qwen3.6 ignores `/no_think`).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    reasoning_effort: Option<&'static str>,
+}
+
+/// Models for which netlens asks the server to disable thinking.
+pub fn wants_reasoning_off(model: &str, no_think: bool) -> bool {
+    no_think && model.to_ascii_lowercase().contains("qwen")
 }
 
 #[derive(Deserialize)]
@@ -181,48 +239,16 @@ impl ChatBackend for OpenAiClient {
     }
 
     fn chat(&self, messages: &[ChatMessage]) -> Result<Completion, LlmError> {
-        let endpoint = self.cfg.endpoint();
-        let body = ChatRequest {
-            model: &self.cfg.model,
-            messages: apply_no_think(&self.cfg.model, messages, self.cfg.no_think),
-            temperature: self.cfg.temperature,
-            stream: false,
-            max_tokens: self.cfg.max_tokens,
-        };
-        let mut req = self
-            .agent
-            .post(&endpoint)
-            .set("Content-Type", "application/json");
-        if let Some(k) = self.cfg.api_key.as_deref().filter(|k| !k.is_empty()) {
-            req = req.set("Authorization", &format!("Bearer {k}"));
-        }
         let start = Instant::now();
-        let resp = match req.send_json(
-            serde_json::to_value(&body).map_err(|e| LlmError::BadResponse(e.to_string()))?,
-        ) {
-            Ok(r) => r,
-            Err(ureq::Error::Status(status, r)) => {
-                let text = r.into_string().unwrap_or_default();
-                let body: String = text.chars().take(400).collect();
-                let hint = if status == 404 && body.contains("not found") {
-                    format!(" (hint: `ollama pull {}` or pass --model)", self.cfg.model)
-                } else if status == 401 || status == 403 {
-                    " (hint: set NETLENS_API_KEY)".to_string()
-                } else {
-                    String::new()
-                };
-                return Err(LlmError::Http { status, body, hint });
-            }
-            Err(ureq::Error::Transport(t)) => {
-                if t.to_string().to_ascii_lowercase().contains("timed out") {
-                    return Err(LlmError::Timeout(self.cfg.timeout));
-                }
-                let detail = match t.message() {
-                    Some(m) => format!("{}: {m}", t.kind()),
-                    None => t.kind().to_string(),
-                };
-                return Err(LlmError::Unreachable { endpoint, detail });
-            }
+        let reasoning = wants_reasoning_off(&self.cfg.model, self.cfg.no_think).then_some("none");
+        let resp = match self.send(messages, reasoning) {
+            // Some OpenAI-compatible servers reject `reasoning_effort`; retry without it.
+            Err(LlmError::Http {
+                status: 400 | 422,
+                body,
+                ..
+            }) if reasoning.is_some() && body.contains("reasoning") => self.send(messages, None)?,
+            other => other?,
         };
         let raw = resp
             .into_string()

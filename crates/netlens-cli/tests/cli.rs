@@ -675,3 +675,16 @@ fn config_precedence() {
         .success()
         .stdout(predicate::str::contains("qwen3:14b"));
 }
+
+#[test]
+fn rules_listing() {
+    let h = TempDir::new().unwrap();
+    nl(&h)
+        .args(["rules"])
+        .assert()
+        .success()
+        .stdout(predicate::str::contains("NL-ACL-003"));
+    let out = nl(&h).args(["rules", "--json"]).output().unwrap();
+    let j = json_of(&out.stdout);
+    assert!(j.as_array().unwrap().len() >= 30);
+}

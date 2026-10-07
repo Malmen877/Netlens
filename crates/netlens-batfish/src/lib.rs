@@ -18,7 +18,7 @@ use std::time::{Duration, Instant};
 use thiserror::Error;
 
 /// pybatfish version we claim to be (the server checks it is present/compatible).
-pub const CLIENT_VERSION: &str = "2025.7.7.2423";
+pub const CLIENT_VERSION: &str = "0.36.0";
 
 #[derive(Debug, Error)]
 pub enum BatfishError {

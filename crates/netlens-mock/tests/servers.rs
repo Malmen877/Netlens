@@ -87,3 +87,43 @@ fn batfish_requires_version_header_and_reports_unreachable() {
     .unwrap_err();
     assert!(e.to_string().contains("cannot reach Batfish"), "{e}");
 }
+
+/// A strict server that rejects `reasoning_effort` must still work (one retry without it).
+#[test]
+fn llm_client_retries_without_reasoning_effort() {
+    let server = tiny_http::Server::http("127.0.0.1:0").unwrap();
+    let port = server.server_addr().to_ip().unwrap().port();
+    let h = std::thread::spawn(move || {
+        let mut seen = Vec::new();
+        for _ in 0..2 {
+            let mut req = server.recv().unwrap();
+            let mut body = String::new();
+            req.as_reader().read_to_string(&mut body).unwrap();
+            let v: serde_json::Value = serde_json::from_str(&body).unwrap();
+            seen.push(v.get("reasoning_effort").cloned());
+            let resp = if v.get("reasoning_effort").is_some() {
+                tiny_http::Response::from_string(
+                    r#"{"error":"unrecognized field reasoning_effort"}"#,
+                )
+                .with_status_code(400)
+            } else {
+                tiny_http::Response::from_string(
+                    r#"{"choices":[{"message":{"role":"assistant","content":"<think>x</think>SUMMARY:\n- ok [F1]"}}]}"#,
+                )
+            };
+            req.respond(resp).unwrap();
+        }
+        seen
+    });
+    let cfg = netlens_llm::ModelConfig {
+        url: format!("http://127.0.0.1:{port}/v1"),
+        model: "qwen3.6:27b".into(),
+        ..Default::default()
+    };
+    let c = netlens_llm::backend_for(&cfg)
+        .chat(&[netlens_llm::ChatMessage::user("hi")])
+        .unwrap();
+    assert_eq!(c.text, "SUMMARY:\n- ok [F1]");
+    let seen = h.join().unwrap();
+    assert_eq!(seen, vec![Some(serde_json::json!("none")), None]);
+}

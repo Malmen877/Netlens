@@ -271,3 +271,25 @@ pub fn phase_two(name: &str, color: ColorChoice) -> Result<u8> {
     }
     Ok(1)
 }
+
+pub fn rules(json: bool, color: ColorChoice) -> Result<u8> {
+    let rules = netlens_core::rules::RULES;
+    if json {
+        let v: Vec<_> = rules
+            .iter()
+            .map(|r| json!({"id": r.id, "severity": r.severity.as_str(), "summary": r.summary}))
+            .collect();
+        println!("{}", serde_json::to_string_pretty(&v)?);
+        return Ok(0);
+    }
+    let s = Style::new(color);
+    for r in rules {
+        println!(
+            "{}  {} {}",
+            s.bold(&format!("{:<12}", r.id)),
+            s.sev(r.severity),
+            r.summary
+        );
+    }
+    Ok(0)
+}
