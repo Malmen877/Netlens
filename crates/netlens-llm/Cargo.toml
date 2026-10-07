@@ -1,0 +1,17 @@
+[package]
+name = "netlens-llm"
+description = "OpenAI-compatible client, <think> stripping, prompts, citation validation and a mock model for netlens"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+netlens-core.workspace = true
+regex.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+ureq.workspace = true
