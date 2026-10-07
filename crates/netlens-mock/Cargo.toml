@@ -1,0 +1,24 @@
+[package]
+name = "netlens-mock"
+description = "Mock OpenAI-compatible model server and mock Batfish server for netlens tests and demos"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "netlens-mock"
+path = "src/main.rs"
+
+[dependencies]
+netlens-core.workspace = true
+netlens-llm.workspace = true
+netlens-batfish.workspace = true
+serde_json.workspace = true
+tiny_http.workspace = true
+zip.workspace = true
+
+[dev-dependencies]
+ureq.workspace = true
