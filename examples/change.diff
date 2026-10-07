@@ -1,0 +1,64 @@
+diff --git a/edge-r1.cfg b/edge-r1.cfg
+index 2909679..867102d 100644
+--- a/edge-r1.cfg
++++ b/edge-r1.cfg
+@@ -2,7 +2,7 @@ Building configuration...
+ 
+ Current configuration : 4211 bytes
+ !
+-! Last configuration change at 09:12:44 CEST Tue Oct 6 2026 by netops
++! Last configuration change at 22:03:10 CEST Wed Oct 7 2026 by netops
+ !
+ version 17.9
+ service timestamps debug datetime msec
+@@ -56,7 +56,7 @@ interface GigabitEthernet1
+ !
+ interface GigabitEthernet2
+  description Core uplink to core-sw1 Te1/0/1
+- mtu 1500
++ mtu 9000
+  ip address 10.0.12.1 255.255.255.252
+  ip ospf message-digest-key 1 md5 7 094F471A1A0A464058
+  ip ospf network point-to-point
+@@ -65,7 +65,7 @@ interface GigabitEthernet2
+ interface GigabitEthernet3
+  description Trunk to access-sw2
+  switchport mode trunk
+- switchport trunk allowed vlan 10,20,30
++ switchport trunk allowed vlan 10,20
+ !
+ interface GigabitEthernet4
+  description MGMT
+@@ -84,6 +84,7 @@ router bgp 65010
+  neighbor 198.51.100.1 remote-as 64500
+  neighbor 198.51.100.1 description ISP-A transit
+  neighbor 198.51.100.1 password 7 02050D480809151C5F
++ neighbor 198.51.100.1 shutdown
+  neighbor 10.255.0.2 remote-as 65010
+  neighbor 10.255.0.2 update-source Loopback0
+  !
+@@ -91,7 +92,7 @@ router bgp 65010
+   network 203.0.113.0 mask 255.255.255.0
+   neighbor 198.51.100.1 activate
+   neighbor 198.51.100.1 route-map RM-ISP-A-IN in
+-  neighbor 198.51.100.1 route-map RM-ISP-A-OUT out
++  neighbor 198.51.100.1 route-map RM-ISP-A-OUT-V2 out
+   neighbor 10.255.0.2 activate
+   neighbor 10.255.0.2 next-hop-self
+  exit-address-family
+@@ -107,7 +108,6 @@ ip access-list extended ACL-EDGE-IN
+  remark --- services ---
+  permit tcp host 198.51.100.1 host 198.51.100.2 eq bgp
+  permit tcp host 198.51.100.1 eq bgp host 198.51.100.2
+- permit tcp any host 203.0.113.10 eq 443
+  permit tcp any host 203.0.113.10 eq www
+  permit udp any host 203.0.113.53 eq domain
+  permit icmp any any echo-reply
+@@ -129,6 +129,7 @@ route-map RM-ISP-A-OUT permit 10
+  match ip address prefix-list PL-OUR-PREFIXES
+ !
+ snmp-server community N3tM0n-R0 RO ACL-VTY
++snmp-server community public RO
+ snmp-server location DC1 row 4 rack 12
+ snmp-server host 10.10.10.60 version 2c N3tM0n-Tr4p
+ !

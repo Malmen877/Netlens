@@ -1,0 +1,16 @@
+Oct  7 21:58:02 edge-r1 1201: Oct  7 21:58:02.114 CEST: %BGP-5-ADJCHANGE: neighbor 198.51.100.1 Up
+Oct  7 21:59:14 edge-r1 1202: Oct  7 21:59:14.601 CEST: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet1, changed state to down
+Oct  7 21:59:15 edge-r1 1203: Oct  7 21:59:15.002 CEST: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet1, changed state to up
+Oct  7 22:00:31 edge-r1 1204: Oct  7 22:00:31.877 CEST: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.1 4/0 (hold time expired) 0 bytes
+Oct  7 22:00:31 edge-r1 1205: Oct  7 22:00:31.878 CEST: %BGP-5-NBR_RESET: Neighbor 198.51.100.1 reset (BGP Notification sent)
+Oct  7 22:00:31 edge-r1 1206: Oct  7 22:00:31.880 CEST: %BGP-5-ADJCHANGE: neighbor 198.51.100.1 Down BGP Notification sent
+Oct  7 22:00:31 edge-r1 1207: Oct  7 22:00:31.880 CEST: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.1 IPv4 Unicast topology base removed from session  BGP Notification sent
+Oct  7 22:00:58 edge-r1 1208: Oct  7 22:00:58.410 CEST: %BGP-5-ADJCHANGE: neighbor 198.51.100.1 Up
+Oct  7 22:01:40 edge-r1 1209: Oct  7 22:01:40.022 CEST: %OSPF-5-ADJCHG: Process 1, Nbr 10.255.0.2 on GigabitEthernet2 from FULL to DOWN, Neighbor Down: Dead timer expired
+Oct  7 22:01:49 edge-r1 1210: Oct  7 22:01:49.513 CEST: %OSPF-5-ADJCHG: Process 1, Nbr 10.255.0.2 on GigabitEthernet2 from LOADING to FULL, Loading Done
+Oct  7 22:02:20 edge-r1 1211: Oct  7 22:02:20.931 CEST: %TCP-6-BADAUTH: No MD5 digest from 198.51.100.1(179) to 198.51.100.2(52113) (RST) tableid - 0
+Oct  7 22:02:44 edge-r1 1212: Oct  7 22:02:44.118 CEST: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.1 4/0 (hold time expired) 0 bytes
+Oct  7 22:02:44 edge-r1 1213: Oct  7 22:02:44.120 CEST: %BGP-5-ADJCHANGE: neighbor 198.51.100.1 Down BGP Notification sent
+Oct  7 22:03:10 edge-r1 1214: Oct  7 22:03:10.551 CEST: %SYS-5-CONFIG_I: Configured from console by netops on vty0 (10.10.4.17)
+Oct  7 22:03:41 edge-r1 1215: Oct  7 22:03:41.203 CEST: %BGP-5-ADJCHANGE: neighbor 198.51.100.1 Up
+Oct  7 22:05:12 edge-r1 1216: Oct  7 22:05:12.774 CEST: %SNMP-3-AUTHFAIL: Authentication failure for SNMP req from host 10.10.10.61
