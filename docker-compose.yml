@@ -1,0 +1,16 @@
+# Optional Batfish sidecar for `netlens review --batfish http://localhost:9996`.
+#
+#   docker compose up -d batfish      # first start pulls ~1.5 GB; give it 4 GB+ RAM
+#   netlens review before.cfg after.cfg --batfish http://localhost:9996
+#   docker compose down
+#
+# netlens talks to the coordinator's v2 REST API (port 9996), the same API pybatfish
+# uses. Ports are bound to localhost only: Batfish has no authentication.
+services:
+  batfish:
+    image: batfish/batfish:latest
+    container_name: netlens-batfish
+    ports:
+      - "127.0.0.1:9996:9996"   # coordinator v2 API (used by netlens)
+      - "127.0.0.1:9997:9997"   # legacy work-manager API
+    restart: unless-stopped
