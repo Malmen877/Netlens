@@ -61,19 +61,11 @@ pub fn session_setup(v: Vendor) -> &'static [&'static str] {
     }
 }
 
-#[derive(Debug, Clone)]
+/// `Default` = embedded allowlist + builtin policy.
+#[derive(Debug, Clone, Default)]
 pub struct CommandGate {
     allowlist: al::AllowlistConfig,
     policy: CommandPolicy,
-}
-
-impl Default for CommandGate {
-    fn default() -> Self {
-        CommandGate {
-            allowlist: al::AllowlistConfig::default(),
-            policy: CommandPolicy::builtin(),
-        }
-    }
 }
 
 impl CommandGate {
