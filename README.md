@@ -1,4 +1,4 @@
-# netlens
+# Netlens
 
 A local, read-only AI copilot for network engineers. It reviews config changes before
 you push them and explains them in plain language, and **every claim cites tool
@@ -17,7 +17,7 @@ without a valid citation are dropped. Runs against any local OpenAI-compatible m
 ## Install
 
 ```sh
-cargo install --git https://github.com/Malmen877/netlens netlens
+cargo install --git https://github.com/Malmen877/Netlens netlens
 ```
 
 ## Quickstart (Ollama)
