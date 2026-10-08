@@ -10,6 +10,7 @@ pub mod audit;
 pub mod diff;
 pub mod facts;
 pub mod finding;
+pub mod gate;
 pub mod ipmask;
 pub mod model;
 pub mod parse;

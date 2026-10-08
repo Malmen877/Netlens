@@ -640,6 +640,7 @@ dependencies = [
 name = "netlens-core"
 version = "0.1.0"
 dependencies = [
+ "netlens-allowlist",
  "regex",
  "serde",
  "serde_json",

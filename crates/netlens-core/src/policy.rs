@@ -94,8 +94,6 @@ pub const DENY_ANY_WORDS: &[&str] = &[
     "delete",
     "clear",
     "debug",
-    "commit",
-    "rollback",
     "erase",
     "redirect",
     "tee",
@@ -287,6 +285,12 @@ impl HumanApproval {
     pub fn confirmed_by_human() -> Self {
         HumanApproval(())
     }
+
+    /// Auto-approval for the offline mock device runner (`--mock-device`)
+    /// only. No real device is reachable through that runner.
+    pub fn auto_for_mock_device() -> Self {
+        HumanApproval(())
+    }
 }
 
 /// A command that passed policy and human approval; the only thing the SSH
@@ -297,6 +301,11 @@ pub struct ApprovedCommand {
 }
 
 impl ApprovedCommand {
+    /// Only the gate builds these after its own re-check.
+    pub(crate) fn from_gate(cmd: String) -> Self {
+        ApprovedCommand { cmd }
+    }
+
     pub fn as_str(&self) -> &str {
         &self.cmd
     }
@@ -372,6 +381,9 @@ mod tests {
     fn denies_injection_and_redirects() {
         no(Vendor::CiscoIos, "show run | redirect flash:x.txt");
         no(Vendor::CiscoIos, "show run | tee flash:x");
+        // Read-only Junos commands that merely contain these words are fine.
+        ok(Vendor::Junos, "show system commit");
+        ok(Vendor::Junos, "show system rollback 1 compare 0");
         no(Vendor::CiscoIos, "show run | append flash:x");
         no(Vendor::Junos, "show configuration | save /var/tmp/x");
         no(Vendor::Junos, "show configuration | display rollback");

@@ -7,6 +7,7 @@
 //! Only an [`ApprovedCommand`] (policy pass + human "y") can be executed.
 
 use crate::policy::ApprovedCommand;
+use crate::vendor::Vendor;
 use std::io::Read;
 use std::path::PathBuf;
 use std::process::{Command, Stdio};
@@ -81,16 +82,71 @@ impl SshTarget {
         a
     }
 
-    /// Run one approved read-only command with an overall timeout.
+    /// Run one approved read-only command as an exec request (no session
+    /// setup), with an overall timeout.
     pub fn run(&self, cmd: &ApprovedCommand, timeout: Duration) -> std::io::Result<SshOutput> {
-        let argv = self.argv(cmd);
+        self.spawn(&self.argv(cmd), None, timeout)
+    }
+
+    /// argv for session mode: no remote command; the CLI session reads the
+    /// script from stdin.
+    pub fn session_argv(&self) -> Vec<String> {
+        let mut a = self.argv(&ApprovedCommand::from_gate(String::new()));
+        a.pop();
+        a
+    }
+
+    /// The stdin script for session mode: the vendor's fixed paging setup
+    /// (compile-time constants, never model output), the approved command,
+    /// then `exit`.
+    pub fn session_script(vendor: Vendor, cmd: &ApprovedCommand) -> String {
+        let mut s = String::new();
+        for line in crate::gate::session_setup(vendor) {
+            s.push_str(line);
+            s.push('\n');
+        }
+        s.push_str(cmd.as_str());
+        s.push_str("\nexit\n");
+        s
+    }
+
+    /// Run one approved command in a short CLI session: disable paging
+    /// (`terminal length 0` / `set cli screen-length 0`) outside the gate,
+    /// run the command, exit.
+    pub fn run_session(
+        &self,
+        vendor: Vendor,
+        cmd: &ApprovedCommand,
+        timeout: Duration,
+    ) -> std::io::Result<SshOutput> {
+        let script = Self::session_script(vendor, cmd);
+        self.spawn(&self.session_argv(), Some(script), timeout)
+    }
+
+    fn spawn(
+        &self,
+        argv: &[String],
+        stdin_data: Option<String>,
+        timeout: Duration,
+    ) -> std::io::Result<SshOutput> {
         let start = Instant::now();
         let mut child = Command::new(&argv[0])
             .args(&argv[1..])
-            .stdin(Stdio::null())
+            .stdin(if stdin_data.is_some() {
+                Stdio::piped()
+            } else {
+                Stdio::null()
+            })
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
             .spawn()?;
+        if let (Some(data), Some(mut stdin)) = (stdin_data, child.stdin.take()) {
+            std::thread::spawn(move || {
+                use std::io::Write;
+                let _ = stdin.write_all(data.as_bytes());
+                // dropping stdin closes it, so the session ends after `exit`
+            });
+        }
         // Drain both pipes concurrently: `show tech-support` easily exceeds the
         // pipe buffer and would otherwise block the child until the timeout.
         let drain = |r: Option<Box<dyn Read + Send>>| {
@@ -144,7 +200,6 @@ impl SshTarget {
 mod tests {
     use super::*;
     use crate::policy::{CommandPolicy, HumanApproval};
-    use crate::vendor::Vendor;
 
     #[test]
     fn argv_is_batch_mode_and_ends_with_host_and_command() {
@@ -165,6 +220,39 @@ mod tests {
         assert_eq!(a[n - 3], "--");
         assert_eq!(a[n - 2], "r1.lab");
         assert_eq!(a[n - 1], "show ip bgp summary");
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn session_mode_sends_setup_then_command_on_stdin() {
+        use std::os::unix::fs::PermissionsExt;
+        let dir = tempfile::tempdir().unwrap();
+        let fake = dir.path().join("fake-ssh");
+        // Echo argv on stderr and stdin on stdout.
+        std::fs::write(&fake, "#!/bin/sh\necho \"$@\" >&2\ncat\n").unwrap();
+        std::fs::set_permissions(&fake, std::fs::Permissions::from_mode(0o755)).unwrap();
+        let mut t = SshTarget::new("r1.lab").unwrap();
+        t.ssh_binary = fake.display().to_string();
+        let gate = crate::gate::CommandGate::default();
+        let v = gate.vet(Vendor::Junos, "show bgp summary").unwrap();
+        let cmd = gate
+            .approve(Vendor::Junos, &v, HumanApproval::confirmed_by_human())
+            .unwrap();
+        let out = t
+            .run_session(Vendor::Junos, &cmd, Duration::from_secs(10))
+            .unwrap();
+        assert_eq!(
+            out.stdout,
+            "set cli screen-length 0\nshow bgp summary\nexit\n"
+        );
+        assert!(
+            out.stderr.trim_end().ends_with("-- r1.lab"),
+            "{}",
+            out.stderr
+        );
+        assert!(out.stderr.contains("BatchMode=yes"));
+        let ios = SshTarget::session_script(Vendor::CiscoIos, &cmd);
+        assert!(ios.starts_with("terminal length 0\n"));
     }
 
     #[test]
