@@ -468,10 +468,10 @@ mod tests {
             "  3082024E 308201B7 A0030201 02020101 300D0609 2A864886",
             "3082024E",
         );
-        let pem = "crypto key\n-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAu1SU1LfVLPHCozMxH2Mo4lgOEePzNm0tRgeLezV6ffAt0gun\nVTLw7onLRnrq0/IzW7yWR7QkrmBL7jTKEn5u+qKhbwKfBstIs+bMY2Zkp18gnTxK\n-----END RSA PRIVATE KEY-----\n";
+        let pem = "crypto key\n-----BEGIN RSA PRIVATE KEY-----\nFAKEKEYFORTESTSONLYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nNOTAREALKEYBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n-----END RSA PRIVATE KEY-----\n";
         let out = Redactor::new().redact_text(pem);
-        assert!(!out.contains("MIIEpAIBAAKCAQEAu1SU1LfVLPHC"), "{out}");
-        assert!(!out.contains("VTLw7onLRnrq0"), "{out}");
+        assert!(!out.contains("FAKEKEYFORTESTSONLY"), "{out}");
+        assert!(!out.contains("NOTAREALKEY"), "{out}");
         assert!(out.contains("-----BEGIN RSA PRIVATE KEY-----"));
     }
 

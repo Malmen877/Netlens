@@ -4,9 +4,10 @@ members = ["crates/*"]
 default-members = ["crates/netlens-cli"]
 
 [workspace.package]
+homepage = "https://github.com/Malmen877/netlens"
 version = "0.1.0"
 edition = "2021"
-license = "MIT"
+license = "MIT OR Apache-2.0"
 authors = ["Kevin Malmgren"]
 repository = "https://github.com/Malmen877/netlens"
 rust-version = "1.88"

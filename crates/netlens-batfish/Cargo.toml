@@ -6,7 +6,9 @@ edition.workspace = true
 license.workspace = true
 authors.workspace = true
 repository.workspace = true
+homepage.workspace = true
 rust-version.workspace = true
+keywords = ["batfish", "network", "verification", "config"]
 
 [dependencies]
 netlens-core.workspace = true
