@@ -3,9 +3,12 @@
 ```
 crates/
   netlens-core     parsing, semantic diff, rules, rollback, redaction, IP masking,
-                   audit log, command policy, ssh transport, syslog correlation
+                   audit log, command policy + gate, ssh transport, device runners,
+                   syslog filter
+  netlens-allowlist  read-only show-command allowlist (gate layer 1) + fixture loader
   netlens-llm      OpenAI-compatible client, <think> stripping, prompt/evidence
-                   builder (redact -> mask), citation validator, mock model
+                   builder (redact -> mask), citation validator, mock model,
+                   troubleshoot loop + scripted mock
   netlens-batfish  Batfish v2 REST client + question diffing -> B findings
   netlens-mock     mock OpenAI-compatible server + mock Batfish server (tests, demos)
   netlens-cli      the `netlens` binary (package name `netlens`)
@@ -62,7 +65,7 @@ before/after files ──┐                         ┌─> rules (F1..)   ─�
   and every claim must cite it.
 - **Small dependency set.** `ureq` (blocking HTTP), `regex`, `serde`, `clap`. No async
   runtime, OpenSSL, or SSH library. SSH uses the system OpenSSH binary (see
-  [troubleshoot-design.md](troubleshoot-design.md)).
+  [troubleshoot.md](troubleshoot.md)).
 - **Diff input is partial knowledge.** Checks that need the whole config are skipped
   or limited, and the report says so.
 - **Mocks are first-class.** CI covers the LLM and Batfish paths end-to-end without a

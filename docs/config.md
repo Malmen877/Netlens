@@ -49,7 +49,7 @@ ios = ['^show platform hardware qfp active statistics drop$']
 | Code | Meaning |
 |---|---|
 | 0 | success |
-| 1 | error (bad input, unreadable file, invalid config, phase-2 command) |
+| 1 | error (bad input, unreadable file, invalid config); `troubleshoot` ended without a diagnosis |
 | 2 | `--fail-on` threshold reached, or `policy check` denied the command |
 
 The CLI parser's own usage errors also exit with 2.

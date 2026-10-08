@@ -45,14 +45,23 @@ prompt (hash, or full text with `--audit-prompts`).
 Every model call and (in troubleshoot) every proposed, approved, rejected and executed
 command is written to a JSONL audit log. See [audit.md](audit.md).
 
-## Troubleshooting commands (phase 2, designed now)
+## Troubleshooting commands
 
-See [troubleshoot-design.md](troubleshoot-design.md). In short, a command runs only if:
+See [troubleshoot.md](troubleshoot.md). In short, a command runs only if:
 
-1. it passes the hard denylist (configure, write, copy, delete, reload, request,
-   clear, debug, ... and shell metacharacters);
-2. it matches an anchored allowlist regex for the vendor;
-3. a human typed `y` for that exact command.
+1. it passes netlens-allowlist: printable ASCII only, no injection characters, a
+   compiled-in denylist (configure, write, copy, reload, clear, debug, request,
+   terminal, ping, traceroute, `| redirect`, `| save`, ...), `show` only, and an
+   anchored vendor allowlist;
+2. it passes netlens' own policy (a second denylist and allowlist). The stricter rule wins;
+3. a human typed `y` for that exact command (auto-approval exists only for the
+   offline mock device).
 
 The type system enforces this: the SSH transport only accepts an `ApprovedCommand`,
-which can only be built from a policy pass plus a `HumanApproval` token.
+which only the gate can build, after re-checking the command and receiving a
+`HumanApproval`. Command output is redacted (and optionally IP-masked) before the
+model sees it, and the model's evidence quotes are checked against that text.
+
+Prompt injection: device output and logs are untrusted. The model is told to ignore
+instructions in them, but the real protection is structural. Whatever the model
+proposes still has to pass the gate and your `y`.

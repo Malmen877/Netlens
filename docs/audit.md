@@ -18,11 +18,11 @@ Every line has `ts` (RFC 3339, UTC), `event`, a per-run `session` id, `pid` and 
 | `batfish.run` | url, per-question status, finding count |
 | `model.call` | model, endpoint, **sha256 + size of the exact (redacted, masked) prompt**, response size, latency, ok/error |
 | `review.end` | finding counts, max severity, llm status, exit code |
-| `troubleshoot.start` / `troubleshoot.end` | host, vendor, symptom, step count, outcome |
+| `troubleshoot.start` / `troubleshoot.end` | host, vendor, symptom, runner, model, step counts, outcome, evidence counts |
 | `command.proposed` | the model's raw proposal and its stated reason |
-| `command.rejected` | raw command, rejection kind and reason (gate or policy) |
-| `command.approval` | canonical command, `approved` true/false, `auto` (mock only) |
-| `command.exec` | host, canonical command, transport argv, exit status, latency, output sha256 + size |
+| `command.rejected` | raw command, gate stage (`allowlist`/`policy`), kind and reason |
+| `command.approval` | canonical command, the exact text to send, `approved`, `quit`, `auto` (mock only) |
+| `command.exec` | host, canonical command, sent text, transport (SSH argv + stdin script), exit status, latency, output sha256 + size |
 
 Prompts are stored as a hash by default. `--audit-prompts` (or `audit_prompts = true`)
 stores the full prompt text. That text is already redacted (and masked with
