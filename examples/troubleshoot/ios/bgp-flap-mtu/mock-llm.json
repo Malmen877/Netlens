@@ -1,0 +1,84 @@
+{
+  "_comment": "Scripted replies for netlens' offline mock model (not a real model). Regenerate with crates/netlens-allowlist/tools/gen_mock_llm.py.",
+  "root_cause_id": "mtu-mismatch",
+  "replies": [
+    {
+      "action": "run",
+      "command": "show ip bgp summary",
+      "reason": "Check `show ip bgp summary` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "clear ip bgp 198.51.100.2 soft",
+      "reason": "Soft-reset the session to see if it recovers."
+    },
+    {
+      "action": "run",
+      "command": "show ip bgp neighbors 198.51.100.2",
+      "reason": "Check `show ip bgp neighbors 198.51.100.2` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show interfaces GigabitEthernet0/0/1",
+      "reason": "Check `show interfaces GigabitEthernet0/0/1` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show interfaces description",
+      "reason": "Check `show interfaces description` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show running-config interface GigabitEthernet0/0/1",
+      "reason": "Check `show running-config interface GigabitEthernet0/0/1` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show logging",
+      "reason": "Check `show logging` for evidence about the symptom."
+    },
+    {
+      "action": "final",
+      "root_cause": "Interface MTU mismatch on Gi0/0/1: local 1500 vs far end 9216 (jumbo per CHG-20914). Large BGP UPDATEs from the peer are dropped as giants, so keepalives stall and the hold timer expires. Fix: set mtu 9216 on Gi0/0/1 (or lower the peer MTU / clamp BGP MSS).",
+      "confidence": "high",
+      "evidence": [
+        {
+          "cite": "L42",
+          "quote": "2026-10-08T07:19:39.241+00:00 sto-edge-rtr01 002832: Oct  8 07:19:39.239 UTC: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.2 4/0 (hold time expired) 0 bytes"
+        },
+        {
+          "cite": "O3",
+          "quote": "Last reset 00:02:08, due to BGP Notification sent, hold time expired"
+        },
+        {
+          "cite": "O3",
+          "quote": "Connections established 9; dropped 8"
+        },
+        {
+          "cite": "O3",
+          "quote": "Updates:                2          0"
+        },
+        {
+          "cite": "O4",
+          "quote": "MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec,"
+        },
+        {
+          "cite": "O4",
+          "quote": "0 runts, 112 giants, 0 throttles"
+        },
+        {
+          "cite": "O5",
+          "quote": "Gi0/0/1                        up             up       P2P got-core-rtr02 Te0/1/0 | CKT SE-NET-44817 | jumbo 9216 per CHG-20914"
+        },
+        {
+          "cite": "O3",
+          "quote": "BGP neighbor reset by operator"
+        }
+      ],
+      "next_checks": [
+        "show ip bgp neighbors",
+        "clear ip bgp *"
+      ]
+    }
+  ]
+}

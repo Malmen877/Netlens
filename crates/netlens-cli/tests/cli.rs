@@ -512,11 +512,6 @@ fn colors_respect_flags_and_no_color() {
 fn phase_two_stubs() {
     let h = TempDir::new().unwrap();
     nl(&h)
-        .args(["troubleshoot", "--host", "r1", "bgp down"])
-        .assert()
-        .code(1)
-        .stderr(predicate::str::contains("coming in phase 2"));
-    nl(&h)
         .args(["mcp"])
         .assert()
         .code(1)

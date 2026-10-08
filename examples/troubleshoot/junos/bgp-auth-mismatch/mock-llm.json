@@ -1,0 +1,83 @@
+{
+  "_comment": "Scripted replies for netlens' offline mock model (not a real model). Regenerate with crates/netlens-allowlist/tools/gen_mock_llm.py.",
+  "root_cause_id": "bgp-auth-mismatch",
+  "replies": [
+    {
+      "action": "run",
+      "command": "show bgp summary",
+      "reason": "Check `show bgp summary` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show log messages | save /var/tmp/bgp.txt",
+      "reason": "Keep a copy of the log."
+    },
+    {
+      "action": "run",
+      "command": "show bgp neighbor 203.0.113.9",
+      "reason": "Check `show bgp neighbor 203.0.113.9` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show log messages",
+      "reason": "Check `show log messages` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show log messages | match tcp_auth",
+      "reason": "Check `show log messages | match tcp_auth` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show system commit",
+      "reason": "Check `show system commit` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show interfaces terse xe-0/1/2",
+      "reason": "Check `show interfaces terse xe-0/1/2` for evidence about the symptom."
+    },
+    {
+      "action": "final",
+      "root_cause": "TCP-MD5 authentication key mismatch: the local key was rotated in commit CHG-31120 (09:31 UTC) but the customer still uses the old key, so the kernel drops their segments ('tcp_auth_ok ... wrong MD5 digest') and the session cannot establish. Fix: coordinate the key with the customer (or roll back the key change).",
+      "confidence": "high",
+      "evidence": [
+        {
+          "cite": "O1",
+          "quote": "203.0.113.9           64530          0          0       0       1     1:42:18 Active"
+        },
+        {
+          "cite": "O3",
+          "quote": "Authentication key is configured"
+        },
+        {
+          "cite": "O3",
+          "quote": "Last Error: Hold Timer Expired Error"
+        },
+        {
+          "cite": "L12",
+          "quote": "Oct  8 09:32:48  fra-pe-mx01 kernel: tcp_auth_ok: Packet from 203.0.113.9:52114 wrong MD5 digest"
+        },
+        {
+          "cite": "L4",
+          "quote": "Oct  8 09:31:02  fra-pe-mx01 mgd[48211]: UI_COMMIT: User 'noc-mweber' requested 'commit' operation (comment: CHG-31120 rotate CUST-ACME md5 keys)"
+        },
+        {
+          "cite": "L11",
+          "quote": "Oct  8 09:32:35  fra-pe-mx01 rpd[2041]: RPD_BGP_NEIGHBOR_STATE_CHANGED: BGP peer 203.0.113.9 (External AS 64530) changed state from Established to Idle (event HoldTime) (instance master)"
+        },
+        {
+          "cite": "O6",
+          "quote": "CHG-31120 rotate CUST-ACME md5 keys"
+        },
+        {
+          "cite": "O7",
+          "quote": "xe-0/1/2.200            up    up   inet     203.0.113.10/30"
+        }
+      ],
+      "next_checks": [
+        "show bgp neighbor"
+      ]
+    }
+  ]
+}

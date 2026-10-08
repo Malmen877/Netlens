@@ -5,6 +5,7 @@ mod config;
 mod output;
 mod review;
 mod style;
+mod troubleshoot;
 
 use clap::{Parser, Subcommand};
 use std::path::PathBuf;
@@ -52,8 +53,8 @@ pub enum Cmd {
         #[command(subcommand)]
         cmd: cmds::ConfigCmd,
     },
-    /// Interactive read-only troubleshooting over SSH (coming in phase 2)
-    Troubleshoot(cmds::PhaseTwoArgs),
+    /// Read-only troubleshooting: the model proposes show commands, you approve each one
+    Troubleshoot(troubleshoot::TroubleshootArgs),
     /// Run as an MCP server over stdio (coming in phase 2)
     Mcp(cmds::PhaseTwoArgs),
 }
@@ -68,7 +69,7 @@ fn main() -> ExitCode {
         Cmd::Redact(a) => cmds::redact(a),
         Cmd::Policy { cmd } => cmds::policy(cmd, cli.config.as_deref(), color),
         Cmd::Config { cmd } => cmds::config(cmd, cli.config.as_deref()),
-        Cmd::Troubleshoot(_) => cmds::phase_two("troubleshoot", color),
+        Cmd::Troubleshoot(a) => troubleshoot::run(a, cli.config.as_deref(), color),
         Cmd::Mcp(_) => cmds::phase_two("mcp", color),
     };
     match res {

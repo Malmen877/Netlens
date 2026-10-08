@@ -6,7 +6,7 @@ use crate::review::read_input;
 use crate::style::{ColorChoice, Style};
 use anyhow::Result;
 use clap::{Args, Subcommand};
-use netlens_core::policy::{Verdict, DENY_ANY_WORDS, DENY_FIRST_WORDS};
+use netlens_core::policy::{DENY_ANY_WORDS, DENY_FIRST_WORDS};
 use netlens_core::{Severity, Vendor};
 use serde_json::json;
 use std::path::{Path, PathBuf};
@@ -165,29 +165,63 @@ pub fn policy(cmd: PolicyCmd, config_flag: Option<&Path>, color: ColorChoice) ->
         } => {
             let v = parse_vendor(&vendor)?;
             let cmd = command.join(" ");
-            let verdict = pol.check(v, &cmd);
+            let gate = config::gate(&loaded.file)?;
+            let res = gate.vet(v, &cmd);
             if json {
+                let result = match &res {
+                    Ok(vt) => {
+                        json!({"verdict": "allowed", "send": vt.command, "canonical": vt.canonical})
+                    }
+                    Err(r) => {
+                        json!({"verdict": "denied", "stage": r.stage, "kind": r.kind, "reason": r.reason})
+                    }
+                };
                 println!(
                     "{}",
                     serde_json::to_string(
-                        &json!({"vendor": v.as_str(), "command": cmd, "result": verdict})
+                        &json!({"vendor": v.as_str(), "command": cmd, "result": result})
                     )?
                 );
             } else {
-                match &verdict {
-                    Verdict::Allowed => println!(
-                        "{} {cmd}  {}",
+                match &res {
+                    Ok(vt) => println!(
+                        "{} {}  {}",
                         s.green("ALLOWED"),
-                        s.dim("(would still require y/N approval before running)")
+                        vt.command,
+                        s.dim(&format!(
+                            "(canonical: {}; still needs y/N approval before it runs)",
+                            vt.canonical
+                        ))
                     ),
-                    Verdict::Denied { reason } => println!("{} {cmd}  {}", s.red("DENIED"), reason),
+                    Err(r) => println!("{} {cmd}  {r}", s.red("DENIED")),
                 }
             }
-            Ok(if verdict.is_allowed() { 0 } else { 2 })
+            Ok(if res.is_ok() { 0 } else { 2 })
         }
         PolicyCmd::List { vendor } => {
             let v = parse_vendor(&vendor)?;
-            println!("{} ({})", s.heading("Allowlist"), v.display_name());
+            let gate = config::gate(&loaded.file)?;
+            println!("A command must pass BOTH layers (the stricter rule wins), then your y/N.\n");
+            println!(
+                "{} ({}; netlens-allowlist, matched on the canonical form)",
+                s.heading("Layer 1: allowlist"),
+                v.display_name()
+            );
+            for p in gate
+                .allowlist()
+                .patterns(netlens_core::gate::to_allowlist_vendor(v))
+            {
+                println!("  {p}");
+            }
+            println!(
+                "  denied verbs: {}",
+                netlens_allowlist::allowlist::DENY_VERBS.join(" ")
+            );
+            println!(
+                "\n{} ({})",
+                s.heading("Layer 2: netlens policy"),
+                v.display_name()
+            );
             for p in pol.patterns(v) {
                 println!("  {p}");
             }

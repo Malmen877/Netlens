@@ -8,6 +8,7 @@ pub mod mock;
 pub mod prompt;
 pub mod review;
 pub mod think;
+pub mod troubleshoot;
 
 pub use cite::{validate, Claim, Dropped, Validated};
 pub use client::{backend_for, ChatBackend, ChatMessage, Completion, LlmError, ModelConfig};

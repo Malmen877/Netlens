@@ -1,0 +1,76 @@
+{
+  "_comment": "Scripted replies for netlens' offline mock model (not a real model). Regenerate with crates/netlens-allowlist/tools/gen_mock_llm.py.",
+  "root_cause_id": "bpduguard-errdisable",
+  "replies": [
+    {
+      "action": "run",
+      "command": "show interfaces status err-disabled",
+      "reason": "Check `show interfaces status err-disabled` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "configure terminal",
+      "reason": "Bounce the port."
+    },
+    {
+      "action": "run",
+      "command": "show interfaces GigabitEthernet1/0/12",
+      "reason": "Check `show interfaces GigabitEthernet1/0/12` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show errdisable recovery",
+      "reason": "Check `show errdisable recovery` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show running-config interface GigabitEthernet1/0/12",
+      "reason": "Check `show running-config interface GigabitEthernet1/0/12` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show mac address-table interface GigabitEthernet1/0/12",
+      "reason": "Check `show mac address-table interface GigabitEthernet1/0/12` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show logging",
+      "reason": "Check `show logging` for evidence about the symptom."
+    },
+    {
+      "action": "final",
+      "root_cause": "Gi1/0/12 was err-disabled by BPDU Guard after a device sending BPDUs (a desk switch) was connected; bpduguard errdisable recovery is disabled, so the port stays down. Fix: remove the switch (or replace it with a non-STP device), then shutdown / no shutdown the port; optionally enable 'errdisable recovery cause bpduguard'.",
+      "confidence": "high",
+      "evidence": [
+        {
+          "cite": "O1",
+          "quote": "Gi1/0/12     Desk 3F-12         err-disabled bpduguard"
+        },
+        {
+          "cite": "O3",
+          "quote": "GigabitEthernet1/0/12 is down, line protocol is down (err-disabled)"
+        },
+        {
+          "cite": "L7",
+          "quote": "2026-10-08T08:03:17.904+00:00 cph-acc-sw07 030123: Oct  8 08:03:17.902 UTC: %SPANTREE-2-BLOCK_BPDUGUARD: Received BPDU on port GigabitEthernet1/0/12 with BPDU Guard enabled. Disabling port."
+        },
+        {
+          "cite": "L8",
+          "quote": "2026-10-08T08:03:17.905+00:00 cph-acc-sw07 030124: Oct  8 08:03:17.903 UTC: %PM-4-ERR_DISABLE: bpduguard error detected on Gi1/0/12, putting Gi1/0/12 in err-disable state"
+        },
+        {
+          "cite": "O4",
+          "quote": "bpduguard                    Disabled"
+        },
+        {
+          "cite": "O5",
+          "quote": "spanning-tree bpduguard enable"
+        }
+      ],
+      "next_checks": [
+        "show ip bgp neighbors",
+        "clear ip bgp *"
+      ]
+    }
+  ]
+}

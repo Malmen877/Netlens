@@ -1,0 +1,80 @@
+{
+  "_comment": "Scripted replies for netlens' offline mock model (not a real model). Regenerate with crates/netlens-allowlist/tools/gen_mock_llm.py.",
+  "root_cause_id": "mtu-mismatch",
+  "replies": [
+    {
+      "action": "run",
+      "command": "show ip ospf neighbor",
+      "reason": "Check `show ip ospf neighbor` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "ping 203.0.113.21 size 1500 df-bit",
+      "reason": "Probe the path MTU to the neighbor."
+    },
+    {
+      "action": "run",
+      "command": "show ip ospf neighbor detail",
+      "reason": "Check `show ip ospf neighbor detail` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show ip ospf interface GigabitEthernet0/0/2",
+      "reason": "Check `show ip ospf interface GigabitEthernet0/0/2` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show interfaces GigabitEthernet0/0/2",
+      "reason": "Check `show interfaces GigabitEthernet0/0/2` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show ip interface GigabitEthernet0/0/2",
+      "reason": "Check `show ip interface GigabitEthernet0/0/2` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show logging",
+      "reason": "Check `show logging` for evidence about the symptom."
+    },
+    {
+      "action": "final",
+      "root_cause": "IP MTU mismatch on the Gi0/0/2 segment: local 1500 vs core 9100 after CHG-21877. OSPF DBD packets advertise the interface MTU, the neighbor with the larger MTU is rejected, and the adjacency never leaves EXSTART/EXCHANGE. Fix: align MTU (mtu 9100 / ip mtu 9100 locally, or revert the core) - 'ip ospf mtu-ignore' only hides the problem.",
+      "confidence": "high",
+      "evidence": [
+        {
+          "cite": "O1",
+          "quote": "203.0.113.21      1   EXSTART/DR      00:00:35    198.51.100.17   GigabitEthernet0/0/2"
+        },
+        {
+          "cite": "O3",
+          "quote": "Neighbor priority is 1, State is EXSTART, 37 state changes"
+        },
+        {
+          "cite": "O4",
+          "quote": "Neighbor Count is 1, Adjacent neighbor count is 0"
+        },
+        {
+          "cite": "L3",
+          "quote": "2026-10-08T06:14:07.333+00:00 osl-dist-rtr02 018404: Oct  8 06:14:07.331 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from FULL to DOWN, Neighbor Down: Dead timer expired"
+        },
+        {
+          "cite": "L7",
+          "quote": "2026-10-08T06:16:18.314+00:00 osl-dist-rtr02 018408: Oct  8 06:16:18.312 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions"
+        },
+        {
+          "cite": "O6",
+          "quote": "MTU is 1500 bytes"
+        },
+        {
+          "cite": "O5",
+          "quote": "Description: P2P osl-core-rtr01 Gi0/0/5 | core MTU 9100 per CHG-21877"
+        }
+      ],
+      "next_checks": [
+        "show ip bgp neighbors",
+        "clear ip bgp *"
+      ]
+    }
+  ]
+}

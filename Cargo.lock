@@ -603,6 +603,7 @@ dependencies = [
  "anyhow",
  "assert_cmd",
  "clap",
+ "netlens-allowlist",
  "netlens-batfish",
  "netlens-core",
  "netlens-llm",

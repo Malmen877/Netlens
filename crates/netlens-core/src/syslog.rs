@@ -259,25 +259,54 @@ impl SyslogFilter {
         }
     }
 
-    /// Add terms; return the newly matching lines (oldest first). When the
-    /// budget is exceeded the newest lines are kept.
+    /// Add terms; return the newly matching lines (oldest first).
+    ///
+    /// When more lines match than the budget allows, lines matching a
+    /// specific term (an address, an interface, a config-change marker) win
+    /// over lines that only match a protocol keyword, and within each tier
+    /// the oldest half (the onset) and the newest half are kept.
     pub fn add_terms(&mut self, terms: &[String]) -> Vec<LogHit> {
         for t in terms {
             if !t.trim().is_empty() && !self.terms.iter().any(|x| x.eq_ignore_ascii_case(t)) {
                 self.terms.push(t.clone());
             }
         }
-        let mut new: Vec<usize> = (1..=self.lines.len())
-            .filter(|n| !self.shown.contains(n))
-            .filter(|n| {
-                let l = &self.lines[n - 1];
-                self.terms.iter().any(|t| matches_term(l, t))
-            })
-            .collect();
-        let budget = self.max_total.saturating_sub(self.shown.len());
-        if new.len() > budget {
-            new.drain(..new.len() - budget);
+        let specific = |t: &String| {
+            t.chars().any(|c| c.is_ascii_digit())
+                || ALWAYS_TERMS.iter().any(|a| a.eq_ignore_ascii_case(t))
+        };
+        let (mut tier1, mut tier2) = (Vec::new(), Vec::new());
+        for n in 1..=self.lines.len() {
+            if self.shown.contains(&n) {
+                continue;
+            }
+            let l = &self.lines[n - 1];
+            if self
+                .terms
+                .iter()
+                .filter(|t| specific(t))
+                .any(|t| matches_term(l, t))
+            {
+                tier1.push(n);
+            } else if self.terms.iter().any(|t| matches_term(l, t)) {
+                tier2.push(n);
+            }
         }
+        fn pick(v: Vec<usize>, budget: usize) -> Vec<usize> {
+            if v.len() <= budget {
+                return v;
+            }
+            let head = budget / 2;
+            let tail = budget - head;
+            let mut out: Vec<usize> = v[..head].to_vec();
+            out.extend_from_slice(&v[v.len() - tail..]);
+            out
+        }
+        let budget = self.max_total.saturating_sub(self.shown.len());
+        let mut new = pick(tier1, budget);
+        let left = budget.saturating_sub(new.len());
+        new.extend(pick(tier2, left));
+        new.sort_unstable();
         new.iter()
             .map(|&n| {
                 self.shown.insert(n);
@@ -352,5 +381,21 @@ mod tests {
             "c r1 %BGP-5-ADJCHANGE: neighbor 192.0.2.1 Down"
         );
         assert!(f.shown_line(1).is_none());
+    }
+
+    #[test]
+    fn over_budget_keeps_onset_and_newest() {
+        let mut log = String::new();
+        for i in 0..20 {
+            log.push_str(&format!("t{i} r1 BGP_IO_ERROR peer 192.0.2.1 x\n"));
+        }
+        log.push_str("t20 r1 %BGP-5-ADJCHANGE: neighbor 192.0.2.9 Up\n");
+        let mut f = SyslogFilter::new(&log, 4);
+        let hits = f.add_terms(&symptom_terms("bgp peer 192.0.2.1"));
+        // 20 address lines beat the keyword-only line; onset + newest kept
+        assert_eq!(
+            hits.iter().map(|h| h.line).collect::<Vec<_>>(),
+            vec![1, 2, 19, 20]
+        );
     }
 }

@@ -18,6 +18,7 @@ pub mod policy;
 pub mod redact;
 pub mod rollback;
 pub mod rules;
+pub mod runner;
 pub mod section;
 pub mod ssh;
 pub mod syslog;

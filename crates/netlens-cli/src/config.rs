@@ -233,6 +233,12 @@ pub fn policy(file: &FileConfig) -> Result<netlens_core::policy::CommandPolicy> 
         .map_err(|e| anyhow::anyhow!("config [policy]: {e}"))
 }
 
+/// The troubleshoot command gate (allowlist + policy) with config additions.
+pub fn gate(file: &FileConfig) -> Result<netlens_core::gate::CommandGate> {
+    netlens_core::gate::CommandGate::from_config(&file.policy.allow, file.policy.replace_builtin)
+        .map_err(|e| anyhow::anyhow!("config [policy]: {e}"))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

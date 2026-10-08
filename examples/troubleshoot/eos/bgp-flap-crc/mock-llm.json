@@ -1,0 +1,75 @@
+{
+  "_comment": "Scripted replies for netlens' offline mock model (not a real model). Regenerate with crates/netlens-allowlist/tools/gen_mock_llm.py.",
+  "root_cause_id": "crc-errors-physical",
+  "replies": [
+    "<think>Start with the BGP summary.</think>\n```json\n{\"action\": \"run\", \"command\": \"show ip bgp summary\", \"reason\": \"Check `show ip bgp summary` for evidence about the symptom.\"}\n```",
+    {
+      "action": "run",
+      "command": "bash tcpdump -i et47",
+      "reason": "Capture packets on the uplink."
+    },
+    {
+      "action": "run",
+      "command": "show ip bgp neighbors 192.0.2.0",
+      "reason": "Check `show ip bgp neighbors 192.0.2.0` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show interfaces counters errors",
+      "reason": "Check `show interfaces counters errors` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show interfaces Ethernet47",
+      "reason": "Check `show interfaces Ethernet47` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show interfaces Ethernet47 transceiver",
+      "reason": "Check `show interfaces Ethernet47 transceiver` for evidence about the symptom."
+    },
+    {
+      "action": "run",
+      "command": "show interfaces Ethernet48 transceiver",
+      "reason": "Check `show interfaces Ethernet48 transceiver` for evidence about the symptom."
+    },
+    {
+      "action": "final",
+      "root_cause": "Physical-layer errors on Ethernet47 (CRC/FCS and symbol errors, low Rx power -12.6 dBm) corrupt frames, so BGP keepalives are lost and the 9 s hold timer expires. Fix: clean/replace the fiber or SR optic on Et47 / spine Et3/1; consider BFD and less aggressive BGP timers in the meantime.",
+      "confidence": "high",
+      "evidence": [
+        {
+          "cite": "L73",
+          "quote": "Oct  8 09:21:43 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes"
+        },
+        {
+          "cite": "O3",
+          "quote": "Number of transitions to established: 25"
+        },
+        {
+          "cite": "O3",
+          "quote": "Total Number of TCP retransmissions: 1873"
+        },
+        {
+          "cite": "O4",
+          "quote": "Et47            48213         0     51877     48213         0         0         0"
+        },
+        {
+          "cite": "O5",
+          "quote": "48213 input errors, 48213 CRC, 0 alignment, 51877 symbol, 0 input discards"
+        },
+        {
+          "cite": "O6",
+          "quote": "Et47      38.91     3.29      7.48      -1.02     -12.61      0:00:04 ago"
+        },
+        {
+          "cite": "O1",
+          "quote": "ams-spine-sw02_Et3/1     192.0.2.2        4 64600        1186233   1192410    0    0   41d03h Estab   418    418"
+        }
+      ],
+      "next_checks": [
+        "show interfaces counters errors"
+      ]
+    }
+  ]
+}

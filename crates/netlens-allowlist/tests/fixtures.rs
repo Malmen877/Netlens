@@ -107,6 +107,8 @@ fn every_file_in_a_scenario_is_referenced() {
         let mut referenced: HashSet<String> = s.commands.iter().map(|c| c.file.clone()).collect();
         referenced.insert(s.syslog.clone());
         referenced.insert("scenario.toml".into());
+        // scripted model replies for the offline demo / e2e tests (netlens troubleshoot)
+        referenced.insert("mock-llm.json".into());
         for entry in std::fs::read_dir(&s.dir).unwrap() {
             let name = entry.unwrap().file_name().to_string_lossy().to_string();
             assert!(
