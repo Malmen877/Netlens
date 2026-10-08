@@ -1,0 +1,17 @@
+type external;
+description "Customer eBGP sessions";
+import CUST-IN;
+family inet {
+    unicast {
+        prefix-limit {
+            maximum 100;
+            teardown 80 idle-timeout 30;
+        }
+    }
+}
+export CUST-OUT;
+neighbor 203.0.113.9 {
+    description CUST-ACME-LOGISTICS-primary;
+    authentication-key "$9$FIXTURE-PLACEHOLDER-not-a-real-key"; ## SECRET-DATA
+    peer-as 64530;
+}

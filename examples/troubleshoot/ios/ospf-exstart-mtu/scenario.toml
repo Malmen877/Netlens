@@ -1,0 +1,74 @@
+vendor = "ios"
+hostname = "osl-dist-rtr02"
+title = "OSPF adjacency to core stuck in EXSTART after core MTU change"
+description = """
+osl-dist-rtr02 (ISR4431, IOS-XE 17.6) runs OSPF process 10, area 0, towards osl-core-rtr01 on
+GigabitEthernet0/0/2. Under CHG-21877 the core side was moved to MTU 9100 at about 06:13 UTC; the
+distribution side is still at 1500. Hellos (small) work, so the neighbor reaches 2WAY and starts
+the DBD exchange, but the DBDs carry the larger interface MTU and are rejected. The neighbor sits
+in EXSTART, is torn down with 'Too many retransmissions' roughly every 2 minutes, and starts over."""
+symptom = "Routes via osl-core-rtr01 missing since 06:14 UTC; neighbor 203.0.113.21 shows EXSTART/DR instead of FULL."
+syslog = "syslog.log"
+
+[root_cause]
+id = "mtu-mismatch"
+text = "IP MTU mismatch on the Gi0/0/2 segment: local 1500 vs core 9100 after CHG-21877. OSPF DBD packets advertise the interface MTU, the neighbor with the larger MTU is rejected, and the adjacency never leaves EXSTART/EXCHANGE. Fix: align MTU (mtu 9100 / ip mtu 9100 locally, or revert the core) - 'ip ospf mtu-ignore' only hides the problem."
+
+[[commands]]
+command = "show ip ospf neighbor"
+file = "show_ip_ospf_neighbor.txt"
+
+[[commands]]
+command = "show ip ospf neighbor detail"
+file = "show_ip_ospf_neighbor_detail.txt"
+
+[[commands]]
+command = "show ip ospf interface GigabitEthernet0/0/2"
+file = "show_ip_ospf_interface_GigabitEthernet0-0-2.txt"
+
+[[commands]]
+command = "show interfaces GigabitEthernet0/0/2"
+file = "show_interfaces_GigabitEthernet0-0-2.txt"
+
+[[commands]]
+command = "show ip interface GigabitEthernet0/0/2"
+file = "show_ip_interface_GigabitEthernet0-0-2.txt"
+
+[[commands]]
+command = "show logging"
+file = "show_logging.txt"
+
+[[key_evidence]]
+file = "show_ip_ospf_neighbor.txt"
+line = "203.0.113.21      1   EXSTART/DR      00:00:35    198.51.100.17   GigabitEthernet0/0/2"
+why = "Adjacency stuck in EXSTART: hellos fine, database exchange failing."
+
+[[key_evidence]]
+file = "show_ip_ospf_neighbor_detail.txt"
+line = "    Neighbor priority is 1, State is EXSTART, 37 state changes"
+why = "Neighbor keeps cycling through the same states."
+
+[[key_evidence]]
+file = "show_ip_ospf_interface_GigabitEthernet0-0-2.txt"
+line = "  Neighbor Count is 1, Adjacent neighbor count is 0 "
+why = "Neighbor seen but never becomes adjacent."
+
+[[key_evidence]]
+file = "syslog.log"
+line = "2026-10-08T06:14:07.333+00:00 osl-dist-rtr02 018404: Oct  8 06:14:07.331 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from FULL to DOWN, Neighbor Down: Dead timer expired"
+why = "Adjacency was healthy until 06:14, matching the core change window."
+
+[[key_evidence]]
+file = "syslog.log"
+line = "2026-10-08T06:16:18.314+00:00 osl-dist-rtr02 018408: Oct  8 06:16:18.312 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions"
+why = "Classic MTU-mismatch signature: DBD never acknowledged."
+
+[[key_evidence]]
+file = "show_ip_interface_GigabitEthernet0-0-2.txt"
+line = "  MTU is 1500 bytes"
+why = "Local IP MTU is 1500."
+
+[[key_evidence]]
+file = "show_interfaces_GigabitEthernet0-0-2.txt"
+line = "  Description: P2P osl-core-rtr01 Gi0/0/5 | core MTU 9100 per CHG-21877"
+why = "Far end now runs MTU 9100."

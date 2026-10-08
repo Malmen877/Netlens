@@ -1,0 +1,69 @@
+vendor = "ios"
+hostname = "cph-acc-sw07"
+title = "User desk port err-disabled by BPDU Guard after a small switch was plugged in"
+description = """
+cph-acc-sw07 (Catalyst 9300-48P, IOS-XE 17.9) access port GigabitEthernet1/0/12 (desk 3F-12,
+VLAN 120, voice VLAN 220) has portfast and bpduguard enabled. At 08:03 UTC a PoE-powered desk switch
+that runs spanning tree was plugged in. The port received a BPDU two seconds after link-up and was
+err-disabled. Automatic errdisable recovery is not enabled for bpduguard, so the port stays down
+(down/down, err-disabled) until someone intervenes; the user reported 'no network at my desk'."""
+symptom = "Desk 3F-12 has no network since ~08:03 UTC; the port LED is off and the phone lost power."
+syslog = "syslog.log"
+
+[root_cause]
+id = "bpduguard-errdisable"
+text = "Gi1/0/12 was err-disabled by BPDU Guard after a device sending BPDUs (a desk switch) was connected; bpduguard errdisable recovery is disabled, so the port stays down. Fix: remove the switch (or replace it with a non-STP device), then shutdown / no shutdown the port; optionally enable 'errdisable recovery cause bpduguard'."
+
+[[commands]]
+command = "show interfaces status err-disabled"
+file = "show_interfaces_status_err-disabled.txt"
+
+[[commands]]
+command = "show interfaces GigabitEthernet1/0/12"
+file = "show_interfaces_GigabitEthernet1-0-12.txt"
+
+[[commands]]
+command = "show errdisable recovery"
+file = "show_errdisable_recovery.txt"
+
+[[commands]]
+command = "show running-config interface GigabitEthernet1/0/12"
+file = "show_running-config_interface_GigabitEthernet1-0-12.txt"
+
+[[commands]]
+command = "show mac address-table interface GigabitEthernet1/0/12"
+file = "show_mac_address-table_interface_GigabitEthernet1-0-12.txt"
+
+[[commands]]
+command = "show logging"
+file = "show_logging.txt"
+
+[[key_evidence]]
+file = "show_interfaces_status_err-disabled.txt"
+line = "Gi1/0/12     Desk 3F-12         err-disabled bpduguard"
+why = "Port is err-disabled and the reason is bpduguard."
+
+[[key_evidence]]
+file = "show_interfaces_GigabitEthernet1-0-12.txt"
+line = "GigabitEthernet1/0/12 is down, line protocol is down (err-disabled) "
+why = "down/down because of err-disable, not a cable or speed problem."
+
+[[key_evidence]]
+file = "syslog.log"
+line = "2026-10-08T08:03:17.904+00:00 cph-acc-sw07 030123: Oct  8 08:03:17.902 UTC: %SPANTREE-2-BLOCK_BPDUGUARD: Received BPDU on port GigabitEthernet1/0/12 with BPDU Guard enabled. Disabling port."
+why = "A BPDU arrived on a portfast edge port."
+
+[[key_evidence]]
+file = "syslog.log"
+line = "2026-10-08T08:03:17.905+00:00 cph-acc-sw07 030124: Oct  8 08:03:17.903 UTC: %PM-4-ERR_DISABLE: bpduguard error detected on Gi1/0/12, putting Gi1/0/12 in err-disable state"
+why = "The port manager err-disabled the port."
+
+[[key_evidence]]
+file = "show_errdisable_recovery.txt"
+line = "bpduguard                    Disabled"
+why = "No automatic recovery, so the port stays down."
+
+[[key_evidence]]
+file = "show_running-config_interface_GigabitEthernet1-0-12.txt"
+line = " spanning-tree bpduguard enable"
+why = "BPDU Guard is configured on the port."

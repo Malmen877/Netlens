@@ -1,0 +1,5 @@
+Interface               Admin Link Proto    Local                 Remote
+xe-0/1/2                up    up
+xe-0/1/2.200            up    up   inet     203.0.113.10/30 
+                                   multiservice
+xe-0/1/2.32767          up    up   multiservice

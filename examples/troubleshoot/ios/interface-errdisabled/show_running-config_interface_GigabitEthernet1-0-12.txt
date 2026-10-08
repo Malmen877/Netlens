@@ -1,0 +1,12 @@
+Building configuration...
+
+Current configuration : 228 bytes
+!
+interface GigabitEthernet1/0/12
+ description Desk 3F-12
+ switchport access vlan 120
+ switchport mode access
+ switchport voice vlan 220
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+end

@@ -1,0 +1,46 @@
+2026-10-08T06:40:12.606+00:00 sto-edge-rtr01 002791: Oct  8 06:40:12.604 UTC: %SEC_LOGIN-5-LOGIN_SUCCESS: Login Success [user: noc-akarlsson] [Source: 192.0.2.50] [localport: 22] at 06:40:12 UTC Thu Oct 8 2026
+2026-10-08T06:40:35.120+00:00 sto-edge-rtr01 002792: Oct  8 06:40:35.118 UTC: %CLEAR-5-COUNTERS: Clear counter on interface GigabitEthernet0/0/1 by noc-akarlsson on vty0 (192.0.2.50)
+2026-10-08T06:51:58.404+00:00 sto-edge-rtr01 002793: Oct  8 06:51:58.402 UTC: %LINK-3-UPDOWN: Interface GigabitEthernet0/0/1, changed state to down
+2026-10-08T06:51:58.407+00:00 sto-edge-rtr01 002794: Oct  8 06:51:58.405 UTC: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/1, changed state to down
+2026-10-08T06:51:58.413+00:00 sto-edge-rtr01 002795: Oct  8 06:51:58.411 UTC: %BGP-5-NBR_RESET: Neighbor 198.51.100.2 reset (Interface flap)
+2026-10-08T06:51:58.415+00:00 sto-edge-rtr01 002796: Oct  8 06:51:58.413 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Down Interface flap
+2026-10-08T06:51:58.416+00:00 sto-edge-rtr01 002797: Oct  8 06:51:58.414 UTC: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.2 IPv4 Unicast topology base removed from session  Interface flap
+2026-10-08T06:55:01.879+00:00 sto-edge-rtr01 002798: Oct  8 06:55:01.877 UTC: %LINK-3-UPDOWN: Interface GigabitEthernet0/0/1, changed state to up
+2026-10-08T06:55:02.881+00:00 sto-edge-rtr01 002799: Oct  8 06:55:02.879 UTC: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/1, changed state to up
+2026-10-08T06:55:33.206+00:00 sto-edge-rtr01 002800: Oct  8 06:55:33.204 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Up
+2026-10-08T06:58:33.211+00:00 sto-edge-rtr01 002801: Oct  8 06:58:33.209 UTC: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.2 4/0 (hold time expired) 0 bytes
+2026-10-08T06:58:33.212+00:00 sto-edge-rtr01 002802: Oct  8 06:58:33.210 UTC: %BGP-5-NBR_RESET: Neighbor 198.51.100.2 reset (BGP Notification sent)
+2026-10-08T06:58:33.214+00:00 sto-edge-rtr01 002803: Oct  8 06:58:33.212 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Down BGP Notification sent
+2026-10-08T06:58:33.215+00:00 sto-edge-rtr01 002804: Oct  8 06:58:33.213 UTC: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.2 IPv4 Unicast topology base removed from session  BGP Notification sent
+2026-10-08T06:59:04.211+00:00 sto-edge-rtr01 002805: Oct  8 06:59:04.209 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Up
+2026-10-08T07:02:04.216+00:00 sto-edge-rtr01 002806: Oct  8 07:02:04.214 UTC: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.2 4/0 (hold time expired) 0 bytes
+2026-10-08T07:02:04.217+00:00 sto-edge-rtr01 002807: Oct  8 07:02:04.215 UTC: %BGP-5-NBR_RESET: Neighbor 198.51.100.2 reset (BGP Notification sent)
+2026-10-08T07:02:04.219+00:00 sto-edge-rtr01 002808: Oct  8 07:02:04.217 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Down BGP Notification sent
+2026-10-08T07:02:04.220+00:00 sto-edge-rtr01 002809: Oct  8 07:02:04.218 UTC: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.2 IPv4 Unicast topology base removed from session  BGP Notification sent
+2026-10-08T07:02:35.216+00:00 sto-edge-rtr01 002810: Oct  8 07:02:35.214 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Up
+2026-10-08T07:04:51.222+00:00 sto-edge-rtr01 002811: Oct  8 07:04:51.220 UTC: %SYS-6-LOGOUT: User noc-akarlsson has exited tty session 2(192.0.2.50)
+2026-10-08T07:05:35.221+00:00 sto-edge-rtr01 002812: Oct  8 07:05:35.219 UTC: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.2 4/0 (hold time expired) 0 bytes
+2026-10-08T07:05:35.222+00:00 sto-edge-rtr01 002813: Oct  8 07:05:35.220 UTC: %BGP-5-NBR_RESET: Neighbor 198.51.100.2 reset (BGP Notification sent)
+2026-10-08T07:05:35.224+00:00 sto-edge-rtr01 002814: Oct  8 07:05:35.222 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Down BGP Notification sent
+2026-10-08T07:05:35.225+00:00 sto-edge-rtr01 002815: Oct  8 07:05:35.223 UTC: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.2 IPv4 Unicast topology base removed from session  BGP Notification sent
+2026-10-08T07:06:06.221+00:00 sto-edge-rtr01 002816: Oct  8 07:06:06.219 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Up
+2026-10-08T07:09:06.226+00:00 sto-edge-rtr01 002817: Oct  8 07:09:06.224 UTC: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.2 4/0 (hold time expired) 0 bytes
+2026-10-08T07:09:06.227+00:00 sto-edge-rtr01 002818: Oct  8 07:09:06.225 UTC: %BGP-5-NBR_RESET: Neighbor 198.51.100.2 reset (BGP Notification sent)
+2026-10-08T07:09:06.229+00:00 sto-edge-rtr01 002819: Oct  8 07:09:06.227 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Down BGP Notification sent
+2026-10-08T07:09:06.230+00:00 sto-edge-rtr01 002820: Oct  8 07:09:06.228 UTC: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.2 IPv4 Unicast topology base removed from session  BGP Notification sent
+2026-10-08T07:09:37.226+00:00 sto-edge-rtr01 002821: Oct  8 07:09:37.224 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Up
+2026-10-08T07:12:37.231+00:00 sto-edge-rtr01 002822: Oct  8 07:12:37.229 UTC: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.2 4/0 (hold time expired) 0 bytes
+2026-10-08T07:12:37.232+00:00 sto-edge-rtr01 002823: Oct  8 07:12:37.230 UTC: %BGP-5-NBR_RESET: Neighbor 198.51.100.2 reset (BGP Notification sent)
+2026-10-08T07:12:37.234+00:00 sto-edge-rtr01 002824: Oct  8 07:12:37.232 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Down BGP Notification sent
+2026-10-08T07:12:37.235+00:00 sto-edge-rtr01 002825: Oct  8 07:12:37.233 UTC: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.2 IPv4 Unicast topology base removed from session  BGP Notification sent
+2026-10-08T07:13:08.231+00:00 sto-edge-rtr01 002826: Oct  8 07:13:08.229 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Up
+2026-10-08T07:16:08.236+00:00 sto-edge-rtr01 002827: Oct  8 07:16:08.234 UTC: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.2 4/0 (hold time expired) 0 bytes
+2026-10-08T07:16:08.237+00:00 sto-edge-rtr01 002828: Oct  8 07:16:08.235 UTC: %BGP-5-NBR_RESET: Neighbor 198.51.100.2 reset (BGP Notification sent)
+2026-10-08T07:16:08.239+00:00 sto-edge-rtr01 002829: Oct  8 07:16:08.237 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Down BGP Notification sent
+2026-10-08T07:16:08.240+00:00 sto-edge-rtr01 002830: Oct  8 07:16:08.238 UTC: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.2 IPv4 Unicast topology base removed from session  BGP Notification sent
+2026-10-08T07:16:39.236+00:00 sto-edge-rtr01 002831: Oct  8 07:16:39.234 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Up
+2026-10-08T07:19:39.241+00:00 sto-edge-rtr01 002832: Oct  8 07:19:39.239 UTC: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.2 4/0 (hold time expired) 0 bytes
+2026-10-08T07:19:39.242+00:00 sto-edge-rtr01 002833: Oct  8 07:19:39.240 UTC: %BGP-5-NBR_RESET: Neighbor 198.51.100.2 reset (BGP Notification sent)
+2026-10-08T07:19:39.244+00:00 sto-edge-rtr01 002834: Oct  8 07:19:39.242 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Down BGP Notification sent
+2026-10-08T07:19:39.245+00:00 sto-edge-rtr01 002835: Oct  8 07:19:39.243 UTC: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.2 IPv4 Unicast topology base removed from session  BGP Notification sent
+2026-10-08T07:20:10.241+00:00 sto-edge-rtr01 002836: Oct  8 07:20:10.239 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Up

@@ -1,0 +1,88 @@
+vendor = "junos"
+hostname = "fra-pe-mx01"
+title = "Customer eBGP session down since a TCP-MD5 key rotation (authentication mismatch)"
+description = """
+fra-pe-mx01 (MX204, Junos 22.4R3) peers eBGP with customer ACME Logistics (AS 64530) on
+xe-0/1/2.200. At 09:31 UTC an engineer committed CHG-31120, which rotated the TCP-MD5
+authentication key for the neighbor, but the customer still uses the old key. From then on the
+kernel drops every segment from 203.0.113.9 ('wrong MD5 digest'), the established session dies on
+hold timer expiry 90 s later, and every reconnect attempt is silently dropped. The interface is
+up/up and the peer is reachable at layer 3; the failure is TCP authentication."""
+symptom = "BGP peer 203.0.113.9 (AS 64530) in Active state for 1h42m; customer reports their primary link has no routes."
+syslog = "syslog.log"
+
+[root_cause]
+id = "bgp-auth-mismatch"
+text = "TCP-MD5 authentication key mismatch: the local key was rotated in commit CHG-31120 (09:31 UTC) but the customer still uses the old key, so the kernel drops their segments ('tcp_auth_ok ... wrong MD5 digest') and the session cannot establish. Fix: coordinate the key with the customer (or roll back the key change)."
+
+[[commands]]
+command = "show bgp summary"
+file = "show_bgp_summary.txt"
+
+[[commands]]
+command = "show bgp neighbor 203.0.113.9"
+file = "show_bgp_neighbor_203.0.113.9.txt"
+
+[[commands]]
+command = "show log messages"
+file = "show_log_messages.txt"
+
+[[commands]]
+command = "show log messages | match tcp_auth"
+file = "show_log_messages_match_tcp_auth.txt"
+
+[[commands]]
+command = "show configuration protocols bgp group CUST-EBGP"
+file = "show_configuration_protocols_bgp_group_CUST-EBGP.txt"
+
+[[commands]]
+command = "show system commit"
+file = "show_system_commit.txt"
+
+[[commands]]
+command = "show interfaces terse xe-0/1/2"
+file = "show_interfaces_terse_xe-0-1-2.txt"
+
+[[commands]]
+command = "show route receive-protocol bgp 203.0.113.9"
+file = "show_route_receive-protocol_bgp_203.0.113.9.txt"
+
+[[key_evidence]]
+file = "show_bgp_summary.txt"
+line = "203.0.113.9           64530          0          0       0       1     1:42:18 Active"
+why = "Session down (Active) for 1h42m."
+
+[[key_evidence]]
+file = "show_bgp_neighbor_203.0.113.9.txt"
+line = "  Authentication key is configured"
+why = "TCP-MD5 is in use on this session."
+
+[[key_evidence]]
+file = "show_bgp_neighbor_203.0.113.9.txt"
+line = "  Last Error: Hold Timer Expired Error"
+why = "The established session died because nothing valid arrived any more."
+
+[[key_evidence]]
+file = "syslog.log"
+line = "Oct  8 09:32:48  fra-pe-mx01 kernel: tcp_auth_ok: Packet from 203.0.113.9:52114 wrong MD5 digest"
+why = "The peer's connection attempts carry a different MD5 key."
+
+[[key_evidence]]
+file = "syslog.log"
+line = "Oct  8 09:31:02  fra-pe-mx01 mgd[48211]: UI_COMMIT: User 'noc-mweber' requested 'commit' operation (comment: CHG-31120 rotate CUST-ACME md5 keys)"
+why = "The key was changed locally right before the failure."
+
+[[key_evidence]]
+file = "syslog.log"
+line = "Oct  8 09:32:35  fra-pe-mx01 rpd[2041]: RPD_BGP_NEIGHBOR_STATE_CHANGED: BGP peer 203.0.113.9 (External AS 64530) changed state from Established to Idle (event HoldTime) (instance master)"
+why = "Session dropped 90 s (one hold time) after the commit."
+
+[[key_evidence]]
+file = "show_system_commit.txt"
+line = "    CHG-31120 rotate CUST-ACME md5 keys"
+why = "Commit history confirms the key rotation."
+
+[[key_evidence]]
+file = "show_interfaces_terse_xe-0-1-2.txt"
+line = "xe-0/1/2.200            up    up   inet     203.0.113.10/30 "
+why = "Layer 1-3 are fine; the problem is above IP."

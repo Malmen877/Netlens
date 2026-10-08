@@ -1,0 +1,116 @@
+BGP neighbor is 198.51.100.2,  remote AS 64520, external link
+ Description: TRANSIT got-core-rtr02
+  BGP version 4, remote router ID 203.0.113.129
+  BGP state = Established, up for 00:01:37
+  Last read 00:01:37, last write 00:00:37, hold time is 180, keepalive interval is 60 seconds
+  Neighbor sessions:
+    1 active, is not multisession capable (disabled)
+  Neighbor capabilities:
+    Route refresh: advertised and received(new)
+    Four-octets ASN Capability: advertised and received
+    Address family IPv4 Unicast: advertised and received
+    Enhanced Refresh Capability: advertised and received
+    Multisession Capability: 
+    Stateful switchover support enabled: NO for session 1
+  Message statistics:
+    InQ depth is 0
+    OutQ depth is 0
+    
+                         Sent       Rcvd
+    Opens:                  1          1
+    Notifications:          0          0
+    Updates:                2          0
+    Keepalives:             2          1
+    Route Refresh:          0          0
+    Total:                  5          2
+  Do log neighbor state changes (via global configuration)
+  Default minimum time between advertisement runs is 30 seconds
+
+ For address family: IPv4 Unicast
+  Session: 198.51.100.2
+  BGP table version 48213, neighbor version 48213/0
+  Output queue size : 0
+  Index 1, Advertise bit 0
+  1 update-group member
+  Inbound path policy configured
+  Outbound path policy configured
+  Route map for incoming advertisements is TRANSIT-IN
+  Route map for outgoing advertisements is TRANSIT-OUT
+                                 Sent       Rcvd
+  Prefix activity:               ----       ----
+    Prefixes Current:               4          0
+    Prefixes Total:                36          0
+    Implicit Withdraw:              0          0
+    Explicit Withdraw:              0          0
+    Used as bestpath:             n/a          0
+    Used as multipath:            n/a          0
+    Used as secondary:            n/a          0
+
+                                   Outbound    Inbound
+  Local Policy Denied Prefixes:    --------    -------
+    Total:                                0          0
+  Number of NLRIs in the update sent: max 4, min 0
+  Last detected as dynamic slow peer: never
+  Dynamic slow peer recovered: never
+  Refresh Epoch: 1
+  Last Sent Refresh Start-of-rib: never
+  Last Sent Refresh End-of-rib: never
+  Last Received Refresh Start-of-rib: never
+  Last Received Refresh End-of-rib: never
+				       Sent	  Rcvd
+	Refresh activity:	       ----	  ----
+	  Refresh Start-of-RIB          0          0
+	  Refresh End-of-RIB            0          0
+
+  Address tracking is enabled, the RIB does have a route to 198.51.100.2
+  Route to peer address reachability Up: 1; Down: 0
+    Last notification 00:29:49
+  Connections established 9; dropped 8
+  Last reset 00:02:08, due to BGP Notification sent, hold time expired
+  External BGP neighbor configured for connected checks (single-hop no-disable-connected-check)
+  Interface associated: GigabitEthernet0/0/1 (peering address in same link)
+  Transport(tcp) path-mtu-discovery is enabled
+  Graceful-Restart is disabled
+  SSO is disabled
+Connection state is ESTAB, I/O status: 1, unread input bytes: 0            
+Connection is ECN Disabled, Mininum incoming TTL 0, Outgoing TTL 1
+Local host: 198.51.100.1, Local port: 179
+Foreign host: 198.51.100.2, Foreign port: 38211
+Connection tableid (VRF): 0
+Maximum output segment queue size: 50
+
+Enqueued packets for retransmit: 0, input: 0  mis-ordered: 0 (0 bytes)
+
+Event Timers (current time is 0x4F2A1D8C):
+Timer          Starts    Wakeups            Next
+Retrans             4          0             0x0
+TimeWait            0          0             0x0
+AckHold             2          1             0x0
+SendWnd             0          0             0x0
+KeepAlive           0          0             0x0
+GiveUp              0          0             0x0
+PmtuAger            1          0      0x4F2B07EC
+DeadWait            0          0             0x0
+Linger              0          0             0x0
+ProcessQ            0          0             0x0
+
+iss: 3381022741  snduna: 3381023092  sndnxt: 3381023092
+irs: 1170354119  rcvnxt: 1170354207
+
+sndwnd:  16384  scale:      0  maxrcvwnd:  16384
+rcvwnd:  16296  scale:      0  delrcvwnd:     88
+
+SRTT: 287 ms, RTTO: 1046 ms, RTV: 759 ms, KRTT: 0 ms
+minRTT: 1 ms, maxRTT: 300 ms, ACK hold: 200 ms
+uptime: 97412 ms, Sent idletime: 37301 ms, Receive idletime: 97108 ms 
+Status Flags: passive open, gen tcbs
+Option Flags: nagle, path mtu capable
+IP Precedence value : 6
+
+Datagrams (max data segment is 1460 bytes):
+Rcvd: 6 (out of order: 0), with data: 2, total data bytes: 87
+Sent: 7 (retransmit: 0, fastretransmit: 0, partialack: 0, Second Congestion: 0), with data: 4, total data bytes: 350
+
+ Packets received in fast path: 0, fast processed: 0, slow path: 0
+ fast lock acquisition failures: 0, slow path: 0
+TCP Semaphore      0x7F3B2C6E1A40  FREE 

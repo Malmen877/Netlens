@@ -1,0 +1,91 @@
+BGP neighbor is 192.0.2.0, remote AS 64600, external link
+  Description: ams-spine-sw01_Et3/1
+  BGP version 4, remote router ID 203.0.113.1, VRF default
+  Negotiated BGP version 4
+  Peer is a member of peer-group SPINE
+  Last read 00:00:01, last write 00:00:00
+  Hold time is 9, keepalive interval is 3 seconds
+  Configured hold time is 9, keepalive interval is 3 seconds
+  Effective minimum hold time is 3 seconds
+  Connect timer is inactive
+  Connection interval is 3 seconds
+  Idle-restart timer is inactive
+  BGP state is Established, up for 00:00:41
+  Number of transitions to established: 25
+  Last state was OpenConfirm
+  Last event was RecvKeepAlive
+  Last sent notification:Hold Timer Expired Error, Last time 00:00:52
+  Neighbor Capabilities:
+    Multiprotocol IPv4 Unicast: advertised and received and negotiated
+    Four Octet ASN: advertised and received and negotiated
+    Route Refresh: advertised and received and negotiated
+    Enhanced route refresh: advertised and received and negotiated
+    Send End-of-RIB messages: advertised and received and negotiated
+    Additional-paths recv capability:
+      IPv4 Unicast: advertised
+    Additional-paths send capability:
+      IPv4 Unicast: received
+    Graceful Restart helper: advertised and received
+  Restart timer is inactive
+  End of rib timer is inactive
+    IPv4 Unicast End-of-RIB received: Yes
+      Received 00:00:40
+      Number of stale paths removed after graceful restart: 0
+  Message Statistics:
+    InQ depth is 0
+    OutQ depth is 0
+                           Sent      Rcvd
+    Opens:                   25        25
+    Notifications:           24         0
+    Updates:                402       388
+    Keepalives:            2937      2714
+    Enhanced Route Refresh:   0         0
+    Begin of Route Refresh:   0         0
+    End of Route Refresh:     0         0
+    Total messages:        3388      3127
+  Prefix Statistics:
+                                   Sent      Rcvd     Best Paths     Best ECMP Paths
+    IPv4 Unicast:                    37       412            412                   0
+    IPv6 Unicast:                     0         0              0                   0
+  Configured maximum total number of routes is 12000
+  Inbound updates dropped by reason:
+    AS path loop detection: 0
+    Cluster ID loop detection: 0
+    Enforced First AS: 0
+    Originator ID matches local router ID: 0
+    Nexthop matches local IP address: 0
+    Unexpected IPv6 nexthop for IPv4 routes: 0
+    Nexthop invalid for single hop eBGP: 0
+  Inbound updates with attribute errors:
+    Resulting in removal of all paths in update (treat-as-withdraw): 0
+    Resulting in AFI/SAFI disable: 0
+    Resulting in attribute ignore: 0
+  Inbound paths dropped by reason:
+    IPv4 unicast NLRIs dropped due to excessive labels: 0
+Local AS is 64601, local router ID 203.0.113.13
+TTL is 1
+Local TCP address is 192.0.2.1, local port is 179
+Remote TCP address is 192.0.2.0, remote port is 33207
+Local next hop for next hop self:
+  IPv4 Unicast: 192.0.2.1
+BFD is disabled
+TCP Socket Information:
+  TCP state is ESTABLISHED
+  Recv-Q: 0/32768
+  Send-Q: 0/46080
+  Outgoing Maximum Segment Size (MSS): 9162
+  Total Number of TCP retransmissions: 1873
+  Options:
+    Timestamps enabled: yes
+    Selective Acknowledgments enabled: yes
+    Window Scale enabled: yes
+    Explicit Congestion Notification (ECN) enabled: no
+  Socket Statistics:
+    Window Scale (wscale): 7,7
+    Round-trip time (rtt): 0.912ms
+    Round-trip variance (rttvar): 1.244ms
+    Retransmission timeout (rto): 204ms
+    Congestion window (cwnd): 4
+    Slow start threshold (ssthresh): 7
+    TCP throughput: 319.12 Mbps
+    Advertised receive window (rcv_space): 64400

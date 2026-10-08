@@ -1,0 +1,13 @@
+2026-10-08T07:58:39.111+00:00 cph-acc-sw07 030117: Oct  8 07:58:39.109 UTC: %LINK-3-UPDOWN: Interface GigabitEthernet1/0/31, changed state to up
+2026-10-08T07:58:40.119+00:00 cph-acc-sw07 030118: Oct  8 07:58:40.117 UTC: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet1/0/31, changed state to up
+2026-10-08T08:03:11.312+00:00 cph-acc-sw07 030119: Oct  8 08:03:11.310 UTC: %ILPOWER-7-DETECT: Interface Gi1/0/12: Power Device detected: IEEE PD
+2026-10-08T08:03:11.914+00:00 cph-acc-sw07 030120: Oct  8 08:03:11.912 UTC: %ILPOWER-5-POWER_GRANTED: Interface Gi1/0/12: Power granted
+2026-10-08T08:03:15.443+00:00 cph-acc-sw07 030121: Oct  8 08:03:15.441 UTC: %LINK-3-UPDOWN: Interface GigabitEthernet1/0/12, changed state to up
+2026-10-08T08:03:16.450+00:00 cph-acc-sw07 030122: Oct  8 08:03:16.448 UTC: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet1/0/12, changed state to up
+2026-10-08T08:03:17.904+00:00 cph-acc-sw07 030123: Oct  8 08:03:17.902 UTC: %SPANTREE-2-BLOCK_BPDUGUARD: Received BPDU on port GigabitEthernet1/0/12 with BPDU Guard enabled. Disabling port.
+2026-10-08T08:03:17.905+00:00 cph-acc-sw07 030124: Oct  8 08:03:17.903 UTC: %PM-4-ERR_DISABLE: bpduguard error detected on Gi1/0/12, putting Gi1/0/12 in err-disable state
+2026-10-08T08:03:18.907+00:00 cph-acc-sw07 030125: Oct  8 08:03:18.905 UTC: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet1/0/12, changed state to down
+2026-10-08T08:03:19.904+00:00 cph-acc-sw07 030126: Oct  8 08:03:19.902 UTC: %LINK-3-UPDOWN: Interface GigabitEthernet1/0/12, changed state to down
+2026-10-08T08:03:19.953+00:00 cph-acc-sw07 030127: Oct  8 08:03:19.951 UTC: %ILPOWER-5-IEEE_DISCONNECT: Interface Gi1/0/12: PD removed
+2026-10-08T08:47:02.520+00:00 cph-acc-sw07 030128: Oct  8 08:47:02.518 UTC: %SEC_LOGIN-5-LOGIN_SUCCESS: Login Success [user: helpdesk-lnielsen] [Source: 192.0.2.71] [localport: 22] at 08:47:02 UTC Thu Oct 8 2026
+2026-10-08T08:47:30.008+00:00 cph-acc-sw07 030129: Oct  8 08:47:30.006 UTC: %SYS-6-LOGOUT: User helpdesk-lnielsen has exited tty session 1(192.0.2.71)

@@ -1,0 +1,86 @@
+Syslog logging: enabled (0 messages dropped, 3 messages rate-limited, 0 flushes, 0 overruns, xml disabled, filtering disabled)
+
+No Active Message Discriminator.
+
+
+No Inactive Message Discriminator.
+
+
+    Console logging: disabled
+    Monitor logging: level debugging, 0 messages logged, xml disabled,
+                     filtering disabled
+    Buffer logging:  level informational, 434 messages logged, xml disabled,
+                    filtering disabled
+    Exception Logging: size (4096 bytes)
+    Count and timestamp logging messages: disabled
+    Persistent logging: disabled
+
+No active filter modules.
+
+    Trap logging: level informational, 434 message lines logged
+        Logging to 192.0.2.50  (udp port 514, audit disabled,
+              link up),
+              434 message lines logged,
+              0 message lines rate-limited,
+              0 message lines dropped-by-MD,
+              xml disabled, sequence number enabled
+              filtering disabled
+        Logging Source-Interface:       VRF Name:
+        Loopback0
+
+Log Buffer (65536 bytes):
+
+018402: Oct  8 06:09:51.330 UTC: %SEC_LOGIN-5-LOGIN_SUCCESS: Login Success [user: rancid] [Source: 192.0.2.60] [localport: 22] at 06:09:51 UTC Thu Oct 8 2026
+018403: Oct  8 06:09:58.012 UTC: %SYS-6-LOGOUT: User rancid has exited tty session 2(192.0.2.60)
+018404: Oct  8 06:14:07.331 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from FULL to DOWN, Neighbor Down: Dead timer expired
+018405: Oct  8 06:14:12.902 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+018406: Oct  8 06:14:12.905 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+018407: Oct  8 06:14:12.906 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+018408: Oct  8 06:16:18.312 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+018409: Oct  8 06:16:27.700 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+018410: Oct  8 06:16:27.703 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+018411: Oct  8 06:16:27.704 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+018412: Oct  8 06:18:33.110 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+018413: Oct  8 06:18:42.498 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+018414: Oct  8 06:18:42.501 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+018415: Oct  8 06:18:42.502 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+018416: Oct  8 06:20:47.908 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+018417: Oct  8 06:20:57.296 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+018418: Oct  8 06:20:57.299 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+018419: Oct  8 06:20:57.300 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+018420: Oct  8 06:23:02.706 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+018421: Oct  8 06:23:12.094 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+018422: Oct  8 06:23:12.097 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+018423: Oct  8 06:23:12.098 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+018424: Oct  8 06:25:17.504 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+018425: Oct  8 06:25:26.892 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+018426: Oct  8 06:25:26.895 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+018427: Oct  8 06:25:26.896 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+018428: Oct  8 06:27:32.302 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+018429: Oct  8 06:27:41.690 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+018430: Oct  8 06:27:41.693 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+018431: Oct  8 06:27:41.694 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+018432: Oct  8 06:29:47.100 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+018433: Oct  8 06:29:56.488 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+018434: Oct  8 06:29:56.491 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+018435: Oct  8 06:29:56.492 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+018436: Oct  8 06:32:01.898 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+018437: Oct  8 06:32:11.286 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+018438: Oct  8 06:32:11.289 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+018439: Oct  8 06:32:11.290 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+018440: Oct  8 06:34:16.696 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+018441: Oct  8 06:34:26.084 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+018442: Oct  8 06:34:26.087 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+018443: Oct  8 06:34:26.088 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+018444: Oct  8 06:36:31.494 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+018445: Oct  8 06:36:40.882 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+018446: Oct  8 06:36:40.885 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+018447: Oct  8 06:36:40.886 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+018448: Oct  8 06:38:46.292 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+018449: Oct  8 06:38:55.680 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+018450: Oct  8 06:38:55.683 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+018451: Oct  8 06:38:55.684 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+018452: Oct  8 06:41:01.090 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+018453: Oct  8 06:41:10.478 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+018454: Oct  8 06:41:10.481 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+018455: Oct  8 06:41:10.482 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?

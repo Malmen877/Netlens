@@ -1,0 +1,4 @@
+
+inet.0: 913161 destinations, 1825589 routes (912449 active, 0 holddown, 0 hidden)
+
+inet6.0: 211846 destinations, 423020 routes (211797 active, 0 holddown, 0 hidden)

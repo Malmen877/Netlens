@@ -1,0 +1,21 @@
+GigabitEthernet0/0/2 is up, line protocol is up 
+  Internet Address 198.51.100.18/30, Interface ID 9, Area 0
+  Attached via Network Statement
+  Process ID 10, Router ID 203.0.113.22, Network Type BROADCAST, Cost: 1
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           1         no          no            Base
+  Transmit Delay is 1 sec, State BDR, Priority 1
+  Designated Router (ID) 203.0.113.21, Interface address 198.51.100.17
+  Backup Designated router (ID) 203.0.113.22, Interface address 198.51.100.18
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:03
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Index 2/2/2, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 0, maximum is 3
+  Last flood scan time is 0 msec, maximum is 1 msec
+  Neighbor Count is 1, Adjacent neighbor count is 0 
+  Suppress hello for 0 neighbor(s)

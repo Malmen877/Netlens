@@ -1,0 +1,78 @@
+Syslog logging: enabled (0 messages dropped, 3 messages rate-limited, 0 flushes, 0 overruns, xml disabled, filtering disabled)
+
+No Active Message Discriminator.
+
+
+No Inactive Message Discriminator.
+
+
+    Console logging: disabled
+    Monitor logging: level debugging, 0 messages logged, xml disabled,
+                     filtering disabled
+    Buffer logging:  level informational, 426 messages logged, xml disabled,
+                    filtering disabled
+    Exception Logging: size (4096 bytes)
+    Count and timestamp logging messages: disabled
+    Persistent logging: disabled
+
+No active filter modules.
+
+    Trap logging: level informational, 426 message lines logged
+        Logging to 192.0.2.50  (udp port 514, audit disabled,
+              link up),
+              426 message lines logged,
+              0 message lines rate-limited,
+              0 message lines dropped-by-MD,
+              xml disabled, sequence number enabled
+              filtering disabled
+        Logging Source-Interface:       VRF Name:
+        Loopback0
+
+Log Buffer (65536 bytes):
+
+002791: Oct  8 06:40:12.604 UTC: %SEC_LOGIN-5-LOGIN_SUCCESS: Login Success [user: noc-akarlsson] [Source: 192.0.2.50] [localport: 22] at 06:40:12 UTC Thu Oct 8 2026
+002792: Oct  8 06:40:35.118 UTC: %CLEAR-5-COUNTERS: Clear counter on interface GigabitEthernet0/0/1 by noc-akarlsson on vty0 (192.0.2.50)
+002793: Oct  8 06:51:58.402 UTC: %LINK-3-UPDOWN: Interface GigabitEthernet0/0/1, changed state to down
+002794: Oct  8 06:51:58.405 UTC: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/1, changed state to down
+002795: Oct  8 06:51:58.411 UTC: %BGP-5-NBR_RESET: Neighbor 198.51.100.2 reset (Interface flap)
+002796: Oct  8 06:51:58.413 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Down Interface flap
+002797: Oct  8 06:51:58.414 UTC: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.2 IPv4 Unicast topology base removed from session  Interface flap
+002798: Oct  8 06:55:01.877 UTC: %LINK-3-UPDOWN: Interface GigabitEthernet0/0/1, changed state to up
+002799: Oct  8 06:55:02.879 UTC: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/1, changed state to up
+002800: Oct  8 06:55:33.204 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Up
+002801: Oct  8 06:58:33.209 UTC: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.2 4/0 (hold time expired) 0 bytes
+002802: Oct  8 06:58:33.210 UTC: %BGP-5-NBR_RESET: Neighbor 198.51.100.2 reset (BGP Notification sent)
+002803: Oct  8 06:58:33.212 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Down BGP Notification sent
+002804: Oct  8 06:58:33.213 UTC: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.2 IPv4 Unicast topology base removed from session  BGP Notification sent
+002805: Oct  8 06:59:04.209 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Up
+002806: Oct  8 07:02:04.214 UTC: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.2 4/0 (hold time expired) 0 bytes
+002807: Oct  8 07:02:04.215 UTC: %BGP-5-NBR_RESET: Neighbor 198.51.100.2 reset (BGP Notification sent)
+002808: Oct  8 07:02:04.217 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Down BGP Notification sent
+002809: Oct  8 07:02:04.218 UTC: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.2 IPv4 Unicast topology base removed from session  BGP Notification sent
+002810: Oct  8 07:02:35.214 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Up
+002811: Oct  8 07:04:51.220 UTC: %SYS-6-LOGOUT: User noc-akarlsson has exited tty session 2(192.0.2.50)
+002812: Oct  8 07:05:35.219 UTC: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.2 4/0 (hold time expired) 0 bytes
+002813: Oct  8 07:05:35.220 UTC: %BGP-5-NBR_RESET: Neighbor 198.51.100.2 reset (BGP Notification sent)
+002814: Oct  8 07:05:35.222 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Down BGP Notification sent
+002815: Oct  8 07:05:35.223 UTC: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.2 IPv4 Unicast topology base removed from session  BGP Notification sent
+002816: Oct  8 07:06:06.219 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Up
+002817: Oct  8 07:09:06.224 UTC: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.2 4/0 (hold time expired) 0 bytes
+002818: Oct  8 07:09:06.225 UTC: %BGP-5-NBR_RESET: Neighbor 198.51.100.2 reset (BGP Notification sent)
+002819: Oct  8 07:09:06.227 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Down BGP Notification sent
+002820: Oct  8 07:09:06.228 UTC: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.2 IPv4 Unicast topology base removed from session  BGP Notification sent
+002821: Oct  8 07:09:37.224 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Up
+002822: Oct  8 07:12:37.229 UTC: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.2 4/0 (hold time expired) 0 bytes
+002823: Oct  8 07:12:37.230 UTC: %BGP-5-NBR_RESET: Neighbor 198.51.100.2 reset (BGP Notification sent)
+002824: Oct  8 07:12:37.232 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Down BGP Notification sent
+002825: Oct  8 07:12:37.233 UTC: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.2 IPv4 Unicast topology base removed from session  BGP Notification sent
+002826: Oct  8 07:13:08.229 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Up
+002827: Oct  8 07:16:08.234 UTC: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.2 4/0 (hold time expired) 0 bytes
+002828: Oct  8 07:16:08.235 UTC: %BGP-5-NBR_RESET: Neighbor 198.51.100.2 reset (BGP Notification sent)
+002829: Oct  8 07:16:08.237 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Down BGP Notification sent
+002830: Oct  8 07:16:08.238 UTC: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.2 IPv4 Unicast topology base removed from session  BGP Notification sent
+002831: Oct  8 07:16:39.234 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Up
+002832: Oct  8 07:19:39.239 UTC: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.2 4/0 (hold time expired) 0 bytes
+002833: Oct  8 07:19:39.240 UTC: %BGP-5-NBR_RESET: Neighbor 198.51.100.2 reset (BGP Notification sent)
+002834: Oct  8 07:19:39.242 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Down BGP Notification sent
+002835: Oct  8 07:19:39.243 UTC: %BGP_SESSION-5-ADJCHANGE: neighbor 198.51.100.2 IPv4 Unicast topology base removed from session  BGP Notification sent
+002836: Oct  8 07:20:10.239 UTC: %BGP-5-ADJCHANGE: neighbor 198.51.100.2 Up

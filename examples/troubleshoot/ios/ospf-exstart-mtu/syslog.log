@@ -1,0 +1,54 @@
+2026-10-08T06:09:51.332+00:00 osl-dist-rtr02 018402: Oct  8 06:09:51.330 UTC: %SEC_LOGIN-5-LOGIN_SUCCESS: Login Success [user: rancid] [Source: 192.0.2.60] [localport: 22] at 06:09:51 UTC Thu Oct 8 2026
+2026-10-08T06:09:58.014+00:00 osl-dist-rtr02 018403: Oct  8 06:09:58.012 UTC: %SYS-6-LOGOUT: User rancid has exited tty session 2(192.0.2.60)
+2026-10-08T06:14:07.333+00:00 osl-dist-rtr02 018404: Oct  8 06:14:07.331 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from FULL to DOWN, Neighbor Down: Dead timer expired
+2026-10-08T06:14:12.904+00:00 osl-dist-rtr02 018405: Oct  8 06:14:12.902 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+2026-10-08T06:14:12.907+00:00 osl-dist-rtr02 018406: Oct  8 06:14:12.905 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+2026-10-08T06:14:12.908+00:00 osl-dist-rtr02 018407: Oct  8 06:14:12.906 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+2026-10-08T06:16:18.314+00:00 osl-dist-rtr02 018408: Oct  8 06:16:18.312 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+2026-10-08T06:16:27.702+00:00 osl-dist-rtr02 018409: Oct  8 06:16:27.700 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+2026-10-08T06:16:27.705+00:00 osl-dist-rtr02 018410: Oct  8 06:16:27.703 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+2026-10-08T06:16:27.706+00:00 osl-dist-rtr02 018411: Oct  8 06:16:27.704 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+2026-10-08T06:18:33.112+00:00 osl-dist-rtr02 018412: Oct  8 06:18:33.110 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+2026-10-08T06:18:42.500+00:00 osl-dist-rtr02 018413: Oct  8 06:18:42.498 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+2026-10-08T06:18:42.503+00:00 osl-dist-rtr02 018414: Oct  8 06:18:42.501 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+2026-10-08T06:18:42.504+00:00 osl-dist-rtr02 018415: Oct  8 06:18:42.502 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+2026-10-08T06:20:47.910+00:00 osl-dist-rtr02 018416: Oct  8 06:20:47.908 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+2026-10-08T06:20:57.298+00:00 osl-dist-rtr02 018417: Oct  8 06:20:57.296 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+2026-10-08T06:20:57.301+00:00 osl-dist-rtr02 018418: Oct  8 06:20:57.299 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+2026-10-08T06:20:57.302+00:00 osl-dist-rtr02 018419: Oct  8 06:20:57.300 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+2026-10-08T06:23:02.708+00:00 osl-dist-rtr02 018420: Oct  8 06:23:02.706 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+2026-10-08T06:23:12.096+00:00 osl-dist-rtr02 018421: Oct  8 06:23:12.094 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+2026-10-08T06:23:12.099+00:00 osl-dist-rtr02 018422: Oct  8 06:23:12.097 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+2026-10-08T06:23:12.100+00:00 osl-dist-rtr02 018423: Oct  8 06:23:12.098 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+2026-10-08T06:25:17.506+00:00 osl-dist-rtr02 018424: Oct  8 06:25:17.504 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+2026-10-08T06:25:26.894+00:00 osl-dist-rtr02 018425: Oct  8 06:25:26.892 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+2026-10-08T06:25:26.897+00:00 osl-dist-rtr02 018426: Oct  8 06:25:26.895 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+2026-10-08T06:25:26.898+00:00 osl-dist-rtr02 018427: Oct  8 06:25:26.896 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+2026-10-08T06:27:32.304+00:00 osl-dist-rtr02 018428: Oct  8 06:27:32.302 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+2026-10-08T06:27:41.692+00:00 osl-dist-rtr02 018429: Oct  8 06:27:41.690 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+2026-10-08T06:27:41.695+00:00 osl-dist-rtr02 018430: Oct  8 06:27:41.693 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+2026-10-08T06:27:41.696+00:00 osl-dist-rtr02 018431: Oct  8 06:27:41.694 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+2026-10-08T06:29:47.102+00:00 osl-dist-rtr02 018432: Oct  8 06:29:47.100 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+2026-10-08T06:29:56.490+00:00 osl-dist-rtr02 018433: Oct  8 06:29:56.488 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+2026-10-08T06:29:56.493+00:00 osl-dist-rtr02 018434: Oct  8 06:29:56.491 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+2026-10-08T06:29:56.494+00:00 osl-dist-rtr02 018435: Oct  8 06:29:56.492 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+2026-10-08T06:32:01.900+00:00 osl-dist-rtr02 018436: Oct  8 06:32:01.898 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+2026-10-08T06:32:11.288+00:00 osl-dist-rtr02 018437: Oct  8 06:32:11.286 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+2026-10-08T06:32:11.291+00:00 osl-dist-rtr02 018438: Oct  8 06:32:11.289 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+2026-10-08T06:32:11.292+00:00 osl-dist-rtr02 018439: Oct  8 06:32:11.290 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+2026-10-08T06:34:16.698+00:00 osl-dist-rtr02 018440: Oct  8 06:34:16.696 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+2026-10-08T06:34:26.086+00:00 osl-dist-rtr02 018441: Oct  8 06:34:26.084 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+2026-10-08T06:34:26.089+00:00 osl-dist-rtr02 018442: Oct  8 06:34:26.087 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+2026-10-08T06:34:26.090+00:00 osl-dist-rtr02 018443: Oct  8 06:34:26.088 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+2026-10-08T06:36:31.496+00:00 osl-dist-rtr02 018444: Oct  8 06:36:31.494 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+2026-10-08T06:36:40.884+00:00 osl-dist-rtr02 018445: Oct  8 06:36:40.882 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+2026-10-08T06:36:40.887+00:00 osl-dist-rtr02 018446: Oct  8 06:36:40.885 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+2026-10-08T06:36:40.888+00:00 osl-dist-rtr02 018447: Oct  8 06:36:40.886 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+2026-10-08T06:38:46.294+00:00 osl-dist-rtr02 018448: Oct  8 06:38:46.292 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+2026-10-08T06:38:55.682+00:00 osl-dist-rtr02 018449: Oct  8 06:38:55.680 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+2026-10-08T06:38:55.685+00:00 osl-dist-rtr02 018450: Oct  8 06:38:55.683 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+2026-10-08T06:38:55.686+00:00 osl-dist-rtr02 018451: Oct  8 06:38:55.684 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?
+2026-10-08T06:41:01.092+00:00 osl-dist-rtr02 018452: Oct  8 06:41:01.090 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from EXSTART to DOWN, Neighbor Down: Too many retransmissions
+2026-10-08T06:41:10.480+00:00 osl-dist-rtr02 018453: Oct  8 06:41:10.478 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from DOWN to INIT, Received Hello
+2026-10-08T06:41:10.483+00:00 osl-dist-rtr02 018454: Oct  8 06:41:10.481 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from INIT to 2WAY, 2-Way Received
+2026-10-08T06:41:10.484+00:00 osl-dist-rtr02 018455: Oct  8 06:41:10.482 UTC: %OSPF-5-ADJCHG: Process 10, Nbr 203.0.113.21 on GigabitEthernet0/0/2 from 2WAY to EXSTART, AdjOK?

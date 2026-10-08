@@ -1,0 +1,16 @@
+[package]
+name = "netlens-allowlist"
+description = "Read-only show-command allowlist (the netlens command gate) and troubleshooting fixtures"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+rust-version.workspace = true
+keywords = ["network", "allowlist", "cisco", "junos", "arista"]
+
+[dependencies]
+regex.workspace = true
+serde.workspace = true
+toml.workspace = true

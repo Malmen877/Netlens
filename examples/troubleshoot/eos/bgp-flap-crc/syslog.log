@@ -1,0 +1,75 @@
+Oct  8 07:07:42 ams-leaf-sw03 ConfigAgent: %SYS-5-CONFIG_E: Enter configuration mode from console by noc-pvdberg on vty3 (192.0.2.50)
+Oct  8 07:07:49 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event Stop new state Idle
+Oct  8 07:07:49 ams-leaf-sw03 Ebra: %LINEPROTO-5-UPDOWN: Line protocol on Interface Ethernet47 (P2P_ams-spine-sw01_Ethernet3/1), changed state to down
+Oct  8 07:07:55 ams-leaf-sw03 Ebra: %LINEPROTO-5-UPDOWN: Line protocol on Interface Ethernet47 (P2P_ams-spine-sw01_Ethernet3/1), changed state to up
+Oct  8 07:08:01 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 07:08:03 ams-leaf-sw03 ConfigAgent: %SYS-5-CONFIG_I: Configured from console by noc-pvdberg on vty3 (192.0.2.50)
+Oct  8 07:20:57 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 07:20:57 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 07:21:08 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 07:24:54 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 07:24:54 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 07:25:05 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 07:28:06 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 07:28:06 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 07:28:17 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 07:33:26 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 07:33:26 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 07:33:37 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 07:38:31 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 07:38:31 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 07:38:42 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 07:43:25 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 07:43:25 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 07:43:36 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 07:47:36 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 07:47:36 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 07:47:47 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 07:51:28 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 07:51:28 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 07:51:39 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 07:59:07 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 07:59:07 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 07:59:18 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 08:02:51 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 08:02:51 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 08:03:02 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 08:10:53 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 08:10:53 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 08:11:04 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 08:17:29 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 08:17:29 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 08:17:40 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 08:20:45 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 08:20:45 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 08:20:56 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 08:24:00 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 08:24:00 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 08:24:11 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 08:27:47 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 08:27:47 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 08:27:58 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 08:32:38 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 08:32:38 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 08:32:49 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 08:37:37 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 08:37:37 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 08:37:48 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 08:44:55 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 08:44:55 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 08:45:06 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 08:53:03 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 08:53:03 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 08:53:14 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 08:56:16 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 08:56:16 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 08:56:27 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 09:04:03 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 09:04:03 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 09:04:14 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 09:08:44 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 09:08:44 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 09:08:55 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established
+Oct  8 09:21:43 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes
+Oct  8 09:21:43 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state Established event HoldTimerExpired new state Idle
+Oct  8 09:21:54 ams-leaf-sw03 Bgp: %BGP-5-ADJCHANGE: peer 192.0.2.0 (VRF default AS 64600) old state OpenConfirm event RecvKeepAlive new state Established

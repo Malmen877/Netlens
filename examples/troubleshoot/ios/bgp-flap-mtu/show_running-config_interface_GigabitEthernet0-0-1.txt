@@ -1,0 +1,12 @@
+Building configuration...
+
+Current configuration : 241 bytes
+!
+interface GigabitEthernet0/0/1
+ description P2P got-core-rtr02 Te0/1/0 | CKT SE-NET-44817 | jumbo 9216 per CHG-20914
+ ip address 198.51.100.1 255.255.255.252
+ no ip redirects
+ no ip proxy-arp
+ negotiation auto
+ bfd interval 300 min_rx 300 multiplier 3
+end

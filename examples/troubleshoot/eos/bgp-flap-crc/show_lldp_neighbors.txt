@@ -1,0 +1,13 @@
+Last table change time   : 0:00:41 ago
+Number of table inserts  : 31
+Number of table deletes  : 3
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID       Neighbor Port ID    TTL
+---------- ------------------------ ---------------------- ---
+Et1           esx-ams-h031             vmnic2              120
+Et2           esx-ams-h031             vmnic3              120
+Et47          ams-spine-sw01           Ethernet3/1         120
+Et48          ams-spine-sw02           Ethernet3/1         120
+Ma1           ams-oob-sw01             Gi1/0/14            120

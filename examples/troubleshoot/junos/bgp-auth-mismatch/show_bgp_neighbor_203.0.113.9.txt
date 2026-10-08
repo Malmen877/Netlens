@@ -1,0 +1,17 @@
+Peer: 203.0.113.9 AS 64530     Local: 203.0.113.10 AS 64513
+  Description: CUST-ACME-LOGISTICS-primary
+  Group: CUST-EBGP             Routing-Instance: master
+  Forwarding routing-instance: master
+  Type: External    State: Active         Flags: <>
+  Last State: Idle          Last Event: Start
+  Last Error: Hold Timer Expired Error
+  Export: [ CUST-OUT ] Import: [ CUST-IN ]
+  Options: <Preference LogUpDown AuthKey AddressFamily PeerAS PrefixLimit Refresh>
+  Options: <GracefulShutdownRcv>
+  Authentication key is configured
+  Address families configured: inet-unicast
+  Holdtime: 90 Preference: 170
+  Graceful Shutdown Receiver local-preference: 0
+  Number of flaps: 1
+  Last flap event: HoldTime
+  Error: 'Hold Timer Expired Error' Sent: 1 Recv: 0

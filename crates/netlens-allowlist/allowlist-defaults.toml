@@ -1,0 +1,148 @@
+# netlens default command allowlist.
+#
+# Each pattern is matched against the *canonical* command part (lowercased,
+# runs of spaces collapsed, first word normalized to `show`, common
+# abbreviations expanded: `sh ip int br` -> `show ip interface brief`,
+# `sh run` -> `show running-config`). Pipe filters (`| include ...`) are not
+# part of the matched text; they are validated separately by built-in rules.
+#
+# Every pattern is wrapped as (?i)^(?:PATTERN)$ before compiling, so patterns
+# are always anchored and case-insensitive. Placeholders:
+#   {IF}   interface name     {IP}   IPv4/IPv6 address   {PFX} prefix
+#   {NAME} VRF/ACL/group name {NUM}  integer             {MAC} MAC address
+#   {ARGS} one or more words (config hierarchy, section names)
+#
+# This file only says what is ALLOWED. The denylist (configure, write, copy,
+# reload, delete, clear, debug, request, set, edit, commit, rollback, ...,
+# `| redirect`, `| tee`, `| append`, `| save`) is compiled into the binary,
+# always wins, and cannot be changed by this file or by user config.
+#
+# Note: `show running-config` / `show configuration` output contains secrets
+# (hashes, SNMP communities, keys). It is allowed on purpose; netlens core
+# must redact it before it reaches the LLM or the audit log.
+
+[ios]
+allow = [
+  # --- platform / system ---
+  'show version',
+  'show inventory( raw)?',
+  'show clock( detail)?',
+  'show environment( (all|temperature|power|fan|status|alarm))*',
+  'show processes cpu( (sorted|history|platform|1min|5min|5sec))*',
+  'show processes memory( (sorted|platform))*',
+  'show ntp (status|associations( detail)?)',
+  'show logging',
+  'show users',
+  'show system mtu',
+  'show redundancy( states)?',
+  'show install summary',
+  # --- interfaces ---
+  'show interfaces?( {IF})?( (status|counters|errors|description|transceiver|switchport|trunk|summary|stats|detail|err-disabled|connected|notconnect|rates|discards|capabilities))*',
+  'show ip interfaces?( (brief|{IF}))?',
+  'show ipv6 interfaces?( (brief|{IF}))?',
+  'show errdisable (recovery|detect)',
+  'show etherchannel( {NUM})? (summary|detail|port-channel)',
+  'show lacp( {NUM})? (neighbors?|internal|counters)',
+  # --- routing ---
+  'show ip route( vrf {NAME})?( (summary|bgp|ospf|connected|static|eigrp|isis|{PFX}( longer-prefixes)?))?',
+  'show ipv6 route( vrf {NAME})?( (summary|bgp|ospf|connected|static|{PFX}))?',
+  'show ip cef( vrf {NAME})?( {PFX})?( detail)?',
+  'show ip protocols( vrf {NAME})?',
+  'show (ip )?vrf( (brief|detail|{NAME}))*',
+  # --- bgp ---
+  'show (ip )?bgp( (ipv4|ipv6|vpnv4|vpnv6|l2vpn|unicast|multicast|evpn|all|vrf {NAME}))*( (summary|neighbors?( {IP}( (routes|advertised-routes|received-routes|policy|flap-statistics))?)?|{PFX}( (longer-prefixes|best-path-reason))?))?',
+  # --- ospf ---
+  'show ip ospf( {NUM})?( (neighbors?( ({IF}|{IP}))?( detail)?|interfaces?( (brief|{IF}))?|database( (router|network|summary|asbr-summary|external|nssa-external|self-originate|adv-router {IP}|{IP}))*|border-routers|statistics|retransmission-list|request-list))?',
+  'show ipv6 ospf( {NUM})?( (neighbors?( detail)?|interfaces?( (brief|{IF}))?|database))?',
+  'show bfd neighbors?( (details?|ipv4|ipv6))*',
+  'show (standby|vrrp)( (brief|all))?',
+  # --- layer 2 ---
+  'show (lldp|cdp) neighbors?( {IF})?( detail)?',
+  'show (ip )?arp( vrf {NAME})?( ({IF}|{IP}|{MAC}))?',
+  'show mac address-table( (dynamic|static|count|interface {IF}|vlan {NUM}|address {MAC}))*',
+  'show spanning-tree( (summary|detail|blockedports|root|inconsistentports|brief|vlan {NUM}|interface {IF}))*',
+  'show vlan( (brief|id {NUM}|name {NAME}|summary))?',
+  # --- security / config ---
+  'show (ip |ipv6 )?access-lists( {NAME})?',
+  'show running-config( (all|full|interface {IF}|router (bgp|ospf|isis|eigrp)( {NUM})?|partition {ARGS}|section {ARGS}))?',
+  'show startup-config',
+]
+
+[eos]
+allow = [
+  # --- platform / system ---
+  'show version( detail)?',
+  'show inventory',
+  'show clock',
+  'show environment( (all|temperature|cooling|power))*',
+  'show processes( top once)?',
+  'show processes cpu( sorted)?',
+  'show ntp (status|associations)',
+  'show logging( last {NUM}( (seconds|minutes|hours|days))?)?',
+  'show users',
+  'show uptime',
+  # --- interfaces ---
+  'show interfaces?( {IF})?( (status|counters|errors|description|transceiver|switchport|trunk|detail|dom|hardware|properties|errdisabled|connected|notconnect|rates|discards|phy|mtu))*',
+  'show ip interfaces?( (brief|{IF}))?',
+  'show ipv6 interfaces?( (brief|{IF}))?',
+  'show errdisable (recovery|detect)',
+  'show port-channel( {NUM})?( (summary|detail|brief))?',
+  'show lacp (neighbors?|interfaces?|counters|peer)( (brief|detail))?',
+  'show mlag( (detail|interfaces?|config-sanity))?',
+  # --- routing ---
+  'show ip route( vrf {NAME})?( (summary|bgp|ospf|connected|static|isis|detail|{PFX}( longer-prefixes)?))*',
+  'show ipv6 route( vrf {NAME})?( (summary|bgp|ospf|connected|static|{PFX}))*',
+  'show vrf( {NAME})?',
+  # --- bgp ---
+  'show (ip )?bgp( (ipv4|ipv6|unicast|evpn|vrf {NAME}))*( (summary|neighbors?( {IP}( (routes|advertised-routes|received-routes))?)?|{PFX}( (longer-prefixes|detail))?))?( vrf {NAME})?',
+  'show bgp evpn( (summary|route-type {NAME}))*',
+  # --- ospf ---
+  'show ip ospf( {NUM})?( (neighbors?( ({IF}|{IP}))?( detail)?|interfaces?( (brief|{IF}))?|database( (router|network|summary|external|{IP}))*))?( vrf {NAME})?',
+  'show bfd (peers|neighbors?)( (detail|summary))?',
+  'show vrrp( (brief|all))?',
+  # --- layer 2 ---
+  'show lldp neighbors?( {IF})?( detail)?',
+  'show (ip )?arp( vrf {NAME})?( ({IF}|{IP}|{MAC}))?',
+  'show mac address-table( (dynamic|static|count|interface {IF}|vlan {NUM}|address {MAC}))*',
+  'show spanning-tree( (summary|detail|blockedports|root|vlan {NUM}|interface {IF}))*',
+  'show vlan( (brief|{NUM}|summary))?',
+  # --- security / config ---
+  'show (ip |ipv6 )?access-lists( {NAME})?( summary)?',
+  'show running-config( (all|diffs|interfaces? {IF}|section {ARGS}))?',
+  'show startup-config',
+]
+
+[junos]
+allow = [
+  # --- interfaces ---
+  'show interfaces( (terse|extensive|detail|brief|descriptions|statistics|media|diagnostics optics|{IF}))*',
+  'show lacp interfaces( {IF})?( extensive)?',
+  # --- routing ---
+  'show route( (table {NAME}|protocol (bgp|ospf|ospf3|isis|static|direct|local|aggregate)|receive-protocol bgp {IP}|advertising-protocol bgp {IP}|instance {NAME}|summary|extensive|detail|terse|brief|exact|best|active-path|hidden|forwarding-table|{PFX}))*',
+  # --- bgp ---
+  'show bgp summary( (instance {NAME}|group {NAME}))*',
+  'show bgp neighbors?( {IP})?( (instance {NAME}))?',
+  'show bgp group( {NAME})?( (brief|detail|summary))?',
+  # --- ospf / bfd / isis ---
+  'show (ospf|ospf3) (neighbors?|database|interfaces?|overview|statistics|route)( (extensive|detail|brief|instance {NAME}|area {IP}|router|network|netsummary|asbrsummary|external|{IF}|{IP}))*',
+  'show bfd session( (detail|extensive|summary|address {IP}))*',
+  'show isis adjacency( (detail|extensive|brief))?',
+  'show vrrp( (summary|detail|extensive))?',
+  # --- logs / config ---
+  'show log( {NAME})?',
+  'show configuration( {ARGS})?',
+  'show system commit',
+  # --- platform / system ---
+  'show version( (detail|brief))?',
+  'show chassis (hardware|environment|alarms|routing-engine|fpc|pic|fan|temperature-thresholds)( (detail|extensive|models|fpc-slot {NUM}|pic-slot {NUM}))*',
+  'show system (uptime|alarms|storage|users|memory|boot-messages|core-dumps|license)',
+  'show system processes( (extensive|summary|brief))?',
+  'show ntp (associations|status)( no-resolve)?',
+  # --- layer 2 ---
+  'show lldp neighbors( interface {IF})?',
+  'show arp( (no-resolve|interface {IF}|hostname {NAME}))*',
+  'show ethernet-switching table( (brief|extensive|summary|interface {IF}|vlan-name {NAME}))*',
+  'show vlans( (brief|extensive|{NAME}))*',
+  # --- firewall ---
+  'show firewall( (filter {NAME}|counter {NAME}|log|terse))*',
+]

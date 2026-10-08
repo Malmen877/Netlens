@@ -17,6 +17,7 @@ netlens-core = { path = "crates/netlens-core", version = "0.1.0" }
 netlens-llm = { path = "crates/netlens-llm", version = "0.1.0" }
 netlens-batfish = { path = "crates/netlens-batfish", version = "0.1.0" }
 netlens-mock = { path = "crates/netlens-mock", version = "0.1.0" }
+netlens-allowlist = { path = "crates/netlens-allowlist", version = "0.1.0" }
 regex = "1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"

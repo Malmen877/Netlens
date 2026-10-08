@@ -1,0 +1,16 @@
+BGP router identifier 203.0.113.1, local AS number 64512
+BGP table version is 48213, main routing table version 48213
+1247 network entries using 309256 bytes of memory
+1251 path entries using 170136 bytes of memory
+412/398 BGP path/bestpath attribute entries using 118656 bytes of memory
+211 BGP AS-PATH entries using 8956 bytes of memory
+3 BGP community entries using 96 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 607100 total bytes of memory
+BGP activity 9874/8627 prefixes, 31220/29969 paths, scan interval 60 secs
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+198.51.100.2    4        64520       2       5    48213    0    0 00:01:37        0
+198.51.100.6    4        64530  412873  398102    48213    0    0     6w2d     1243
+203.0.113.2     4        64512  201554  201871    48213    0    0     6w2d        4

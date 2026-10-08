@@ -1,0 +1,84 @@
+vendor = "eos"
+hostname = "ams-leaf-sw03"
+title = "Leaf-to-spine eBGP flaps on hold timer expiry; uplink Ethernet47 has rising CRC errors"
+description = """
+ams-leaf-sw03 (DCS-7050SX3-48YC8, EOS 4.31.2F) peers eBGP with ams-spine-sw01 over Ethernet47
+(25G SR, 192.0.2.1/31) using aggressive timers (keepalive 3 s, hold 9 s). The optic or fiber on
+Ethernet47 is degraded: received optical power is about -12.6 dBm (the healthy uplink Et48 reads
+-2.1 dBm), and the port is taking FCS/CRC and symbol errors. Corrupted frames are dropped, so BGP
+keepalives are lost in bursts, TCP retransmits pile up, and the 9 s hold timer expires. The session
+to ams-spine-sw02 over Ethernet48 is stable. An engineer already bounced the port at 07:07 UTC
+without effect."""
+symptom = "BGP to 192.0.2.0 (ams-spine-sw01) flapped 23 times since 07:08 UTC with 'Hold Timer Expired'; ECMP traffic to the spine pair is periodically lost."
+syslog = "syslog.log"
+
+[root_cause]
+id = "crc-errors-physical"
+text = "Physical-layer errors on Ethernet47 (CRC/FCS and symbol errors, low Rx power -12.6 dBm) corrupt frames, so BGP keepalives are lost and the 9 s hold timer expires. Fix: clean/replace the fiber or SR optic on Et47 / spine Et3/1; consider BFD and less aggressive BGP timers in the meantime."
+
+[[commands]]
+command = "show ip bgp summary"
+file = "show_ip_bgp_summary.txt"
+
+[[commands]]
+command = "show ip bgp neighbors 192.0.2.0"
+file = "show_ip_bgp_neighbors_192.0.2.0.txt"
+
+[[commands]]
+command = "show interfaces counters errors"
+file = "show_interfaces_counters_errors.txt"
+
+[[commands]]
+command = "show interfaces Ethernet47"
+file = "show_interfaces_Ethernet47.txt"
+
+[[commands]]
+command = "show interfaces Ethernet47 transceiver"
+file = "show_interfaces_Ethernet47_transceiver.txt"
+
+[[commands]]
+command = "show interfaces Ethernet48 transceiver"
+file = "show_interfaces_Ethernet48_transceiver.txt"
+
+[[commands]]
+command = "show lldp neighbors"
+file = "show_lldp_neighbors.txt"
+
+[[commands]]
+command = "show logging"
+file = "show_logging.txt"
+
+[[key_evidence]]
+file = "syslog.log"
+line = "Oct  8 09:21:43 ams-leaf-sw03 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.0.2.0 (VRF default AS 64600) 4/0 (Hold Timer Expired Error) 0 bytes"
+why = "Session drops because keepalives stop arriving."
+
+[[key_evidence]]
+file = "show_ip_bgp_neighbors_192.0.2.0.txt"
+line = "  Number of transitions to established: 25"
+why = "Repeated flapping."
+
+[[key_evidence]]
+file = "show_ip_bgp_neighbors_192.0.2.0.txt"
+line = "  Total Number of TCP retransmissions: 1873"
+why = "Packet loss on the path to the peer."
+
+[[key_evidence]]
+file = "show_interfaces_counters_errors.txt"
+line = "Et47            48213         0     51877     48213         0         0         0"
+why = "FCS and symbol errors are concentrated on the uplink to the flapping peer."
+
+[[key_evidence]]
+file = "show_interfaces_Ethernet47.txt"
+line = "     48213 input errors, 48213 CRC, 0 alignment, 51877 symbol, 0 input discards"
+why = "CRC errors in the 2 h since counters were cleared."
+
+[[key_evidence]]
+file = "show_interfaces_Ethernet47_transceiver.txt"
+line = "Et47      38.91     3.29      7.48      -1.02     -12.61      0:00:04 ago"
+why = "Rx power is ~10 dB below the healthy uplink: dirty or damaged fiber/optic."
+
+[[key_evidence]]
+file = "show_ip_bgp_summary.txt"
+line = "  ams-spine-sw02_Et3/1     192.0.2.2        4 64600        1186233   1192410    0    0   41d03h Estab   418    418"
+why = "Same spine design over Et48 is stable, so it is not a BGP config problem."

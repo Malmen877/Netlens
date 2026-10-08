@@ -1,0 +1,75 @@
+vendor = "ios"
+hostname = "sto-edge-rtr01"
+title = "eBGP session to transit flaps every ~3.5 minutes (hold time expired) after circuit migration"
+description = """
+sto-edge-rtr01 (Catalyst 8300, IOS-XE 17.9) peers eBGP with got-core-rtr02 (AS 64520) over
+GigabitEthernet0/0/1. The provider migrated the circuit at 06:52 UTC; the far end was set to jumbo
+MTU 9216 as part of CHG-20914, but the local interface was left at the default 1500. The session
+comes up (OPEN/KEEPALIVE are small), then the peer's full-size UPDATE segments (MSS ~9176) arrive as
+giants and are dropped. The peer's keepalives queue behind the unacknowledged data, the local hold
+timer expires after 180 s, and the cycle repeats."""
+symptom = "BGP neighbor 198.51.100.2 goes Up, receives 0 prefixes, and drops with 'hold time expired' every ~3.5 minutes since 06:55 UTC."
+syslog = "syslog.log"
+
+[root_cause]
+id = "mtu-mismatch"
+text = "Interface MTU mismatch on Gi0/0/1: local 1500 vs far end 9216 (jumbo per CHG-20914). Large BGP UPDATEs from the peer are dropped as giants, so keepalives stall and the hold timer expires. Fix: set mtu 9216 on Gi0/0/1 (or lower the peer MTU / clamp BGP MSS)."
+
+[[commands]]
+command = "show ip bgp summary"
+file = "show_ip_bgp_summary.txt"
+
+[[commands]]
+command = "show ip bgp neighbors 198.51.100.2"
+file = "show_ip_bgp_neighbors_198.51.100.2.txt"
+
+[[commands]]
+command = "show interfaces GigabitEthernet0/0/1"
+file = "show_interfaces_GigabitEthernet0-0-1.txt"
+
+[[commands]]
+command = "show interfaces description"
+file = "show_interfaces_description.txt"
+
+[[commands]]
+command = "show running-config interface GigabitEthernet0/0/1"
+file = "show_running-config_interface_GigabitEthernet0-0-1.txt"
+
+[[commands]]
+command = "show logging"
+file = "show_logging.txt"
+
+[[key_evidence]]
+file = "syslog.log"
+line = "2026-10-08T07:19:39.241+00:00 sto-edge-rtr01 002832: Oct  8 07:19:39.239 UTC: %BGP-3-NOTIFICATION: sent to neighbor 198.51.100.2 4/0 (hold time expired) 0 bytes"
+why = "Local router tears the session down because it stopped hearing from the peer."
+
+[[key_evidence]]
+file = "show_ip_bgp_neighbors_198.51.100.2.txt"
+line = "  Last reset 00:02:08, due to BGP Notification sent, hold time expired"
+why = "Repeated hold-timer expiry, not a configuration or capability error."
+
+[[key_evidence]]
+file = "show_ip_bgp_neighbors_198.51.100.2.txt"
+line = "  Connections established 9; dropped 8"
+why = "Session keeps re-establishing: the path works for small packets."
+
+[[key_evidence]]
+file = "show_ip_bgp_neighbors_198.51.100.2.txt"
+line = "    Updates:                2          0"
+why = "No UPDATE ever arrives from the peer even though the session is Established."
+
+[[key_evidence]]
+file = "show_interfaces_GigabitEthernet0-0-1.txt"
+line = "  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, "
+why = "Local MTU is the default 1500."
+
+[[key_evidence]]
+file = "show_interfaces_GigabitEthernet0-0-1.txt"
+line = "     0 runts, 112 giants, 0 throttles "
+why = "Oversized frames from the peer are being dropped on input."
+
+[[key_evidence]]
+file = "show_interfaces_description.txt"
+line = "Gi0/0/1                        up             up       P2P got-core-rtr02 Te0/1/0 | CKT SE-NET-44817 | jumbo 9216 per CHG-20914"
+why = "The circuit was intended to run jumbo 9216, but no mtu is configured locally."

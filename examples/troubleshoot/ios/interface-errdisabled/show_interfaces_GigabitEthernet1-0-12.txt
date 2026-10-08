@@ -1,0 +1,30 @@
+GigabitEthernet1/0/12 is down, line protocol is down (err-disabled) 
+  Hardware is Gigabit Ethernet, address is 4c71.0d3e.218c (bia 4c71.0d3e.218c)
+  Description: Desk 3F-12
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Auto-duplex, Auto-speed, media type is 10/100/1000BaseTX
+  input flow-control is on, output flow-control is unsupported 
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 01:09:22, output 01:09:22, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/2000/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     1840221 packets input, 912337402 bytes, 0 no buffer
+     Received 21877 broadcasts (11402 multicasts)
+     0 runts, 0 giants, 0 throttles 
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 11402 multicast, 0 pause input
+     0 input packets with dribble condition detected
+     4211873 packets output, 3920114577 bytes, 0 underruns
+     Output 288114 broadcasts (402331 multicasts)
+     0 output errors, 0 collisions, 3 interface resets
+     0 unknown protocol drops
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier, 0 pause output
+     0 output buffer failures, 0 output buffers swapped out

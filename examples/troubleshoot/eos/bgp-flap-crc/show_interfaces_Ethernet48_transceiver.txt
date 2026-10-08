@@ -1,0 +1,8 @@
+If device is externally calibrated, only calibrated values are printed.
+N/A: not applicable, Tx: transmit, Rx: receive.
+mA: milliamperes, dBm: decibels (milliwatts).
+                                Bias      Optical   Optical
+          Temp      Voltage   Current   Tx Power  Rx Power
+Port      (Celsius) (Volts)   (mA)      (dBm)     (dBm)       Last Update
+--------- --------- --------- --------- --------- ----------  -------------------
+Et48      37.44     3.30      7.51      -0.87     -2.14       0:00:02 ago

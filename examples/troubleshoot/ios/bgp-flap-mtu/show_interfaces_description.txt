@@ -1,0 +1,10 @@
+Interface                      Status         Protocol Description
+Gi0/0/0                        up             up       P2P sto-agg-sw01 Te1/1/1 | INTERNAL
+Gi0/0/1                        up             up       P2P got-core-rtr02 Te0/1/0 | CKT SE-NET-44817 | jumbo 9216 per CHG-20914
+Gi0/0/2                        up             up       P2P mmo-edge-rtr03 Gi0/0/2 | CKT SE-NET-30121
+Gi0/0/3                        admin down     down     SPARE
+Gi0/0/4                        admin down     down     SPARE
+Gi0/0/5                        admin down     down     SPARE
+Te0/1/0                        down           down     
+Gi0                            up             up       OOB-MGMT
+Lo0                            up             up       ROUTER-ID

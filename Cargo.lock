@@ -615,6 +615,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "netlens-allowlist"
+version = "0.1.0"
+dependencies = [
+ "regex",
+ "serde",
+ "toml",
+]
+
+[[package]]
 name = "netlens-batfish"
 version = "0.1.0"
 dependencies = [

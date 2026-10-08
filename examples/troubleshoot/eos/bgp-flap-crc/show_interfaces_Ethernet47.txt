@@ -1,0 +1,23 @@
+Ethernet47 is up, line protocol is up (connected)
+  Hardware is Ethernet, address is 2899.3a1b.4c7f (bia 2899.3a1b.4c7f)
+  Description: P2P_ams-spine-sw01_Ethernet3/1
+  Internet address is 192.0.2.1/31
+  Broadcast address is 255.255.255.255
+  IP MTU 9214 bytes, BW 25000000 kbit
+  Full-duplex, 25Gb/s, auto negotiation: off, uni-link: n/a
+  Up 2 hours, 14 minutes, 40 seconds
+  Loopback Mode : None
+  4 link status changes since last clear
+  Last clearing of "show interface" counters 2:14:31 ago
+  5 minutes input rate 1.24 Gbps (5.1% with framing overhead), 142318 packets/sec
+  5 minutes output rate 2.87 Gbps (11.8% with framing overhead), 301245 packets/sec
+     1146223380 packets input, 1023455892110 bytes
+     Received 3 broadcasts, 81244 multicast
+     0 runts, 0 giants
+     48213 input errors, 48213 CRC, 0 alignment, 51877 symbol, 0 input discards
+     0 PAUSE input
+     2433908214 packets output, 2211948837302 bytes
+     Sent 2 broadcasts, 80911 multicast
+     0 output errors, 0 collisions
+     0 late collision, 0 deferred, 0 output discards
+     0 PAUSE output
