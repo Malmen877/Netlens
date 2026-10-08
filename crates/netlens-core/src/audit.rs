@@ -1,4 +1,4 @@
-//! Append-only JSONL audit log of every model call and (phase 2) every
+//! Append-only JSONL audit log of every model call and every
 //! command proposed, approved, rejected or run.
 
 use serde_json::{json, Map, Value};

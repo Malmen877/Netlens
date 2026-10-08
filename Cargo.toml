@@ -33,6 +33,8 @@ toml = "0.8"
 assert_cmd = "2"
 predicates = "3"
 tempfile = "3"
+rmcp = { version = "3.5", default-features = false, features = ["server", "macros", "transport-io"] }
+tokio = { version = "1", features = ["rt", "macros", "io-std"] }
 
 [profile.release]
 lto = "thin"

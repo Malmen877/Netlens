@@ -2,6 +2,7 @@
 
 mod cmds;
 mod config;
+mod mcp;
 mod output;
 mod review;
 mod style;
@@ -55,8 +56,8 @@ pub enum Cmd {
     },
     /// Read-only troubleshooting: the model proposes show commands, you approve each one
     Troubleshoot(troubleshoot::TroubleshootArgs),
-    /// Run as an MCP server over stdio (coming in phase 2)
-    Mcp(cmds::PhaseTwoArgs),
+    /// MCP server over stdio with read-only tools: review, lint, redact, vet_command
+    Mcp(mcp::McpArgs),
 }
 
 fn main() -> ExitCode {
@@ -70,7 +71,7 @@ fn main() -> ExitCode {
         Cmd::Policy { cmd } => cmds::policy(cmd, cli.config.as_deref(), color),
         Cmd::Config { cmd } => cmds::config(cmd, cli.config.as_deref()),
         Cmd::Troubleshoot(a) => troubleshoot::run(a, cli.config.as_deref(), color),
-        Cmd::Mcp(_) => cmds::phase_two("mcp", color),
+        Cmd::Mcp(a) => mcp::run(a, cli.config.as_deref()),
     };
     match res {
         Ok(code) => ExitCode::from(code),

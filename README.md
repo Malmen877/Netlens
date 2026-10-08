@@ -11,7 +11,8 @@ without a valid citation are dropped. Runs against any local OpenAI-compatible m
 - **`troubleshoot`**: the model proposes `show` commands; each passes a read-only gate
   and needs your `y` before netlens runs it over SSH. The root cause comes with quotes
   from the outputs and your syslog, and netlens checks every quote.
-- **`mcp`** *(preview)*: the read-only tools as an MCP server.
+- **`mcp`**: `review`, `lint`, `redact` and `vet_command` as an MCP server over stdio
+  (no device access over MCP: it has no human-approval channel).
 
 ## Install
 
@@ -89,7 +90,7 @@ On a real device: `netlens troubleshoot --host edge-r1 --vendor ios --syslog edg
 - Secrets (passwords, keys, hashes, SNMP communities) are redacted before anything
   reaches the model; `netlens redact FILE` shows exactly what it sees.
 - Optional IP masking (`--mask-ips`).
-- JSONL audit log of every model call and device command.
+- JSONL audit log of every model call, device command and MCP tool call.
 
 ## Docs
 
@@ -98,6 +99,6 @@ On a real device: `netlens troubleshoot --host edge-r1 --vendor ios --syslog edg
 [audit](docs/audit.md) · [troubleshoot](docs/troubleshoot.md) · [mcp](docs/mcp.md) ·
 [config](docs/config.md) · [architecture](docs/architecture.md)
 
-Status: v0.1. `review` and `troubleshoot` work (troubleshoot is tested against
-recorded scenarios, not yet against real hardware); `mcp` is in progress.
+Status: v0.1. `troubleshoot` is tested against recorded scenarios and a fake `ssh`,
+not yet against real hardware.
 License: MIT OR Apache-2.0.

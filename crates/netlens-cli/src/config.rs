@@ -50,7 +50,7 @@ audit_prompts = false  # store full (already redacted) prompts in the audit log
 # batfish_url = "http://localhost:9996"
 
 [policy]
-# Extra read-only commands for `troubleshoot` (phase 2). Must be anchored ^...$.
+# Extra read-only commands for `troubleshoot` (added to both gate layers). Must be anchored ^...$.
 replace_builtin = false
 [policy.allow]
 # ios = ['^show platform hardware qfp active statistics drop$']

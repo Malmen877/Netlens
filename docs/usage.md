@@ -8,7 +8,7 @@ netlens redact   [FILE]                       show exactly what the model would 
 netlens policy   check|list                   inspect the read-only command policy
 netlens config   show|example                 effective configuration and its sources
 netlens troubleshoot --host H "symptom"       approved show-command troubleshooting
-netlens mcp                                   MCP server over stdio (read-only tools)
+netlens mcp                                   MCP server over stdio (review, lint, redact, vet_command)
 ```
 
 `netlens <cmd> --help` lists every flag.

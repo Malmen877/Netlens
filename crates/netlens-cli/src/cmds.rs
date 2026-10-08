@@ -1,4 +1,4 @@
-//! Smaller subcommands: lint, redact, policy, config, phase-2 stubs.
+//! Smaller subcommands: lint, redact, policy, config.
 
 use crate::config;
 use crate::output::{counts_line, finding_text, redact_findings};
@@ -67,12 +67,6 @@ pub enum ConfigCmd {
     Path,
     /// Print an example config file
     Example,
-}
-
-#[derive(Args, Debug)]
-pub struct PhaseTwoArgs {
-    #[arg(trailing_var_arg = true, allow_hyphen_values = true, hide = true)]
-    pub rest: Vec<String>,
 }
 
 fn parse_vendor(s: &str) -> Result<Vendor> {
@@ -288,22 +282,6 @@ pub fn config(cmd: ConfigCmd, config_flag: Option<&Path>) -> Result<u8> {
         }
     }
     Ok(0)
-}
-
-pub fn phase_two(name: &str, color: ColorChoice) -> Result<u8> {
-    let s = Style::stderr(color);
-    let what = match name {
-        "troubleshoot" => "read-only troubleshooting: allowlisted show commands over SSH, each approved with y/N, correlated with syslog",
-        _ => "MCP server over stdio (review/lint/redact as MCP tools)",
-    };
-    eprintln!(
-        "{} `netlens {name}` is coming in phase 2 ({what}).",
-        s.yellow(&s.bold("not yet available:"))
-    );
-    if name == "troubleshoot" {
-        eprintln!("Available now: `netlens policy check --vendor ios -- show ip bgp summary` shows what the command policy allows.");
-    }
-    Ok(1)
 }
 
 pub fn rules(json: bool, color: ColorChoice) -> Result<u8> {

@@ -1,4 +1,4 @@
-//! Syslog correlation helpers for troubleshooting (phase 2): pick the log
+//! Syslog correlation helpers for troubleshooting: pick the log
 //! lines that mention the peer/interface in question, with line numbers so
 //! the explanation can quote them as evidence.
 

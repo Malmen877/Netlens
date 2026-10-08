@@ -1,4 +1,4 @@
-//! Read-only command policy for the troubleshooting agent (phase 2).
+//! Read-only command policy for the troubleshooting agent.
 //!
 //! A command must (1) pass the hard denylist, which cannot be overridden,
 //! (2) match an anchored per-vendor allowlist regex, and (3) only pipe into
@@ -276,7 +276,7 @@ impl CommandPolicy {
 }
 
 /// Proof that a human said "y" at the terminal. Constructed only by the
-/// interactive approval prompt (phase 2) or tests.
+/// interactive approval prompt or tests.
 #[derive(Debug)]
 pub struct HumanApproval(());
 

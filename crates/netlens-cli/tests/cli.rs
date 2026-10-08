@@ -509,16 +509,6 @@ fn colors_respect_flags_and_no_color() {
 }
 
 #[test]
-fn phase_two_stubs() {
-    let h = TempDir::new().unwrap();
-    nl(&h)
-        .args(["mcp"])
-        .assert()
-        .code(1)
-        .stderr(predicate::str::contains("coming in phase 2"));
-}
-
-#[test]
 fn policy_check() {
     let h = TempDir::new().unwrap();
     nl(&h)

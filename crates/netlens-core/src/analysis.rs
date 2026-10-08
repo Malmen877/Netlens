@@ -1,4 +1,4 @@
-//! High-level entry points used by the CLI and (phase 2) the MCP server.
+//! High-level entry points used by the CLI and the MCP server.
 
 use crate::diff::{diff, Diff};
 use crate::facts::extract;

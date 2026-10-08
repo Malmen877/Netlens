@@ -22,6 +22,7 @@ Every line has `ts` (RFC 3339, UTC), `event`, a per-run `session` id, `pid` and 
 | `command.proposed` | the model's raw proposal and its stated reason |
 | `command.rejected` | raw command, gate stage (`allowlist`/`policy`), kind and reason |
 | `command.approval` | canonical command, the exact text to send, `approved`, `quit`, `auto` (mock only) |
+| `mcp.tool` | tool name, input sha256 + size, ok |
 | `command.exec` | host, canonical command, sent text, transport (SSH argv + stdin script), exit status, latency, output sha256 + size |
 
 Prompts are stored as a hash by default. `--audit-prompts` (or `audit_prompts = true`)

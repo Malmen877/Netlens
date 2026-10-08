@@ -11,7 +11,8 @@ crates/
                    troubleshoot loop + scripted mock
   netlens-batfish  Batfish v2 REST client + question diffing -> B findings
   netlens-mock     mock OpenAI-compatible server + mock Batfish server (tests, demos)
-  netlens-cli      the `netlens` binary (package name `netlens`)
+  netlens-cli      the `netlens` binary (package name `netlens`), incl. the rmcp
+                   MCP server (`netlens mcp`)
 ```
 
 ## Review pipeline
@@ -63,8 +64,9 @@ before/after files ──┐                         ┌─> rules (F1..)   ─�
 - **Deterministic first.** The model never decides severity, never writes config and
   never generates the rollback. It explains evidence that netlens already produced,
   and every claim must cite it.
-- **Small dependency set.** `ureq` (blocking HTTP), `regex`, `serde`, `clap`. No async
-  runtime, OpenSSL, or SSH library. SSH uses the system OpenSSH binary (see
+- **Small dependency set.** `ureq` (blocking HTTP), `regex`, `serde`, `clap`. No
+  OpenSSL or SSH library. The only async code is the MCP server (rmcp on a
+  single-threaded tokio runtime). SSH uses the system OpenSSH binary (see
   [troubleshoot.md](troubleshoot.md)).
 - **Diff input is partial knowledge.** Checks that need the whole config are skipped
   or limited, and the report says so.
@@ -79,3 +81,7 @@ before/after files ──┐                         ┌─> rules (F1..)   ─�
   included it in the hunk header.
 - No NX-OS / IOS-XR yet; they are detected as IOS and parsed best-effort.
 - The Batfish integration is only tested against the mock server in CI.
+- `troubleshoot` SSH is tested with a fake `ssh` binary and the mock device, not real
+  hardware. CLIs that need a PTY aren't supported yet.
+- The troubleshoot mock model is a script (`mock-llm.json`), so the offline demo shows
+  the plumbing, not diagnostic quality. Use a real model for that.

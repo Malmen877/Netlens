@@ -1,4 +1,4 @@
-//! SSH transport design (used by `netlens troubleshoot` in phase 2).
+//! SSH transport design (used by `netlens troubleshoot`).
 //!
 //! Decision: spawn the system `ssh` client with `BatchMode=yes` instead of
 //! embedding an SSH library. That reuses the engineer's `~/.ssh/config`,

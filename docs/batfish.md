@@ -57,7 +57,7 @@ reported as a warning, and in `--json` output under `batfish.questions[].error`.
 - A single-device snapshot has no neighbors, so BGP/OSPF sessions show as
   `UNKNOWN_REMOTE` / `NOT_ESTABLISHED`. netlens therefore reports *changes* between
   before and after, not absolute states. To get real session and reachability
-  answers, point the snapshot at more of the network (phase 2: multi-file snapshots).
+  answers, point the snapshot at more of the network (multi-file snapshots are planned).
 - The v2 REST API is what pybatfish uses, but Batfish doesn't document it as a
   stable public API. If a future server changes it, netlens degrades to a warning
   and the deterministic review is unaffected.

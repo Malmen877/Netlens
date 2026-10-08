@@ -26,6 +26,8 @@ clap.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 toml.workspace = true
+rmcp.workspace = true
+tokio.workspace = true
 
 [dev-dependencies]
 netlens-mock.workspace = true
